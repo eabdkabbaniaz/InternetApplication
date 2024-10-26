@@ -9,6 +9,7 @@ use Exception;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class LoginController extends Controller
 {
@@ -38,7 +39,7 @@ class LoginController extends Controller
                 return  ResponseService::validation("email is already exist " ); 
             }
             $data = $request->all();
-            $data['password'] = Hash::make($request->password);
+            $data['password'] = FacadesHash::make($request->password);
             $user = User::create($data);
             $token =  $user->createToken('user')->plainTextToken;
             return ResponseService::success("User Register successfully",$token);

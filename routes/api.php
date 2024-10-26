@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\File\FileController as filecontrollergruop;
+use App\Http\Controllers\Group\UserGroupController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Profile\ProfileUserController;
 use App\Http\Controllers\UserController;
@@ -31,21 +32,23 @@ Route::group(['prefix' => 'User'], function () {
 });
 Route::group(['prefix' => 'Auth'], function () {
     Route::post('Register', [LoginController::class, 'Register']);
+    Route::post('updateFileInGroup', [filecontrollergruop::class, 'updateFileInGroup'])->middleware(['auth:sanctum']);
 
     Route::post('login', [LoginController::class, 'login']);
 });
 
 Route::group(['prefix' => 'Group'], function () {
-    Route::post('store', [GroupController::class, 'store']);
+    Route::post('store', [GroupController::class, 'store'])->middleware(['auth:sanctum']);
     Route::delete('destroy/{id}', [GroupController::class, 'destroy']);
     Route::patch('/update/{id}', [GroupController::class, 'update']);
     Route::get('/index', [GroupController::class, 'index']);
     Route::get('/showAllFiles/{id}', [GroupController::class, 'showAllFiles']);
 });
 
-Route::group(['prefix' => 'File'], function () {
+Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum']], function () {
     Route::post('store', [filecontrollergruop::class, 'store']);
-    Route::delete('destroy/{id}', [filecontrollergruop::class, 'destroy']);
+    Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])
+    ->middleware('check.group.admin');
     Route::patch('deActiveStatus/{id}', [filecontrollergruop::class, 'deActiveStatus']);
 });
 Route::group(['prefix' => 'Booking'], function () {
@@ -55,3 +58,10 @@ Route::group(['prefix' => 'Booking'], function () {
 Route::group(['prefix' => 'Profile'], function () {
     Route::get('showProfile', [ProfileUserController::class, 'showProfile'])->middleware(['auth:sanctum']);
 });
+Route::group(['prefix' => 'GroupUser'], function () {
+    Route::post('store', [UserGroupController::class, 'store'])->middleware(['auth:sanctum']);
+    Route::post('show', [UserGroupController::class, 'show'])->middleware(['auth:sanctum']);
+    Route::get('getRoleUser/{groupID}', [UserGroupController::class, 'getRoleUser'])->middleware(['auth:sanctum']);
+
+});
+

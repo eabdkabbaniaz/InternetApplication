@@ -46,6 +46,17 @@ class User extends Authenticatable
     ];
 
     public function groups(){
-        return $this->belongsToMany(Groups::class,'group_users','user_id','group_id')->withPivot('id');
+        return $this->belongsToMany(Groups::class,'group_users','user_id','group_id')->withPivot('id','is_admin');
+    }
+
+
+    public function isAdmin($groupId)
+    {
+        return $this->groups()->where('group_id', $groupId)->where('is_admin', true)->exists();
+    }
+
+    public function isRegularUser($groupId)
+    {
+        return $this->groups()->where('group_id', $groupId)->where('is_admin', false)->exists();
     }
 }

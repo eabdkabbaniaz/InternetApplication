@@ -6,33 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FileStoreRequest;
 use App\Models\File;
 use App\Models\GroupFile;
+use App\Models\Groups;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FileController extends Controller
 {
     public function store(FileStoreRequest $request)
     {
-        $input = $request->all();
-        $input['path'] = $this->uploadeimage($request);
-        $data = [
-            'name' => $request->name,
-            'path' => $input['path'],
-        ];
-        $file = File::create($data);
-        $fileID = $file->id;
-        $groupFile = [];
-        foreach ($request->groupsID  as $groupID) {
-            $gFile =   GroupFile::create([
-                'file_id' => $fileID,
-                'group_id' => $groupID,
+        try {
+            $input = $request->all();
+            $input['path'] = $this->uploadeimage($request);
+            $file = File::create($input);
+            return response()->json([
+                'file' => $file,
             ]);
-            $groupFile[] = [$gFile];
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to upload file: ' . $e->getMessage()
+            ], 500);
         }
-        return response()->json([
-            'file' => $file,
-            'groupFile' => $groupFile
-        ]);
     }
+
     public function uploadeimage($request)
     {
 
@@ -47,26 +42,38 @@ class FileController extends Controller
 
 
 
- 
+
     public function deActiveStatus(string $id)
     {
         $file =   File::find($id);
         if ($file) {
-            $file->status=0;
+            $file->status = 0;
 
             $file->save();
-            return response()->json(['file'=>$file,'message'=>'تم تحرير الملف']);
+            return response()->json(['file' => $file, 'message' => 'تم تحرير الملف']);
         }
         return response()->json('file not found');
     }
 
-    public function destroy(string $id)
+    public function destroy(string $id , $groupId)
     {
+        
         $file =   File::find($id);
         if ($file) {
             $file->delete();
             return response()->json('you are delete successfully');
         }
         return response()->json('file not found');
+    }
+
+
+    public function updateFileInGroup(Request $request)
+    {
+        $group = Groups::findOrFail($request->groupId);
+        if (Gate::allows('manage-group', $group->id)) {
+            return response()->json(['message' => 'File updated successfully.']);
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
     }
 }

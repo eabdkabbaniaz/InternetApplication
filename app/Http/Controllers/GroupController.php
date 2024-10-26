@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupStoreRequest;
 use App\Models\Groups;
+use App\Models\GroupUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GroupController extends Controller
 {
@@ -32,8 +34,14 @@ class GroupController extends Controller
      */
     public function store(GroupStoreRequest $request)
     {
+        $userID = Auth::user()->id;
         $data = $request->all();
         $group = Groups::create($data);
+        GroupUser::create([
+             'group_id' => $group->id,
+            'user_id' => $userID,
+            'is_Admin' => true,
+        ]);
         return response()->json([
             'group' => $group,
         ]);
