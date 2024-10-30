@@ -7,8 +7,11 @@ use App\Http\Requests\FileStoreRequest;
 use App\Models\File;
 use App\Models\GroupFile;
 use App\Models\Groups;
+use App\Models\Version;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class FileController extends Controller
 {
@@ -39,9 +42,6 @@ class FileController extends Controller
             return    $input['path'] = 'uploads/File/' . $filename;
         }
     }
-
-
-
 
     public function deActiveStatus(string $id)
     {
@@ -75,5 +75,58 @@ class FileController extends Controller
         } else {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+        $fileID =  $request->id;
+        $file = File::findOrFail($fileID);
+
+        $data = $request->all();
+       
+        if ($request->hasFile('path')) {
+        $data['path'] = $this->uploadeimage($request);
+        $file->path = $data['path'];
+        $file->save();
+
+        DB::table("versions")->insert([
+            'name' => $request->name,
+            'file_id' => $fileID,
+            'path' => $file->path,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
+        }
+        
+        $file->update($data);
+
+        return response()->json([
+            'file' => $file,
+            'message' => 'File updated successfully!'
+        ], 200);
+          
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to upload file: ' . $e->getMessage()
+            ], 500);
+        }   
+    }
+
+    public function getVersions($id)
+    {
+        $filesVersions = Version::all();
+        $versions = [];
+    
+        foreach ($filesVersions as $fileVersion) {
+            if ($fileVersion->file_id == $id) {
+                $versions[] = $fileVersion;
+            }
+        }
+    
+        return response()->json([
+            'versions' => $versions
+        ]);
     }
 }

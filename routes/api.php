@@ -47,9 +47,10 @@ Route::group(['prefix' => 'Group'], function () {
 
 Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum']], function () {
     Route::post('store', [filecontrollergruop::class, 'store']);
-    Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])
-    ->middleware('check.group.admin');
+    Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])->middleware('check.group.admin');
     Route::patch('deActiveStatus/{id}', [filecontrollergruop::class, 'deActiveStatus']);
+    Route::post('/update/{id}', [filecontrollergruop::class, 'update']); //
+    Route::get('/versions/{id}', [filecontrollergruop::class, 'getVersions']); //
 });
 Route::group(['prefix' => 'Booking'], function () {
     Route::post('store', [BookingController::class, 'store'])->middleware(['auth:sanctum']);
