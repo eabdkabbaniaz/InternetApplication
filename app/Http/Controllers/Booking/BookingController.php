@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 class BookingController extends Controller
 { //exists:categories
     // public function store(Request $request)
@@ -34,8 +35,8 @@ class BookingController extends Controller
 
 
 
-//...................................................................................................................ز
-public function store(Request $request)
+    //...................................................................................................................ز
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'filesID' => 'required|array',
@@ -49,26 +50,23 @@ public function store(Request $request)
         try {
             $files = File::whereIn('id', $fileIds)->lockForUpdate()->get();
             foreach ($files as $file) {
-                if ($file->status==0) {
+                if ($file->status == 1) {
                     DB::rollBack();
-                     $response =new Response() ;
+                    $response = new Response();
                     return  ResponseService::error("Reservation cancelled because $file->name file were already reserved");
                 }
-          Booking::create([
-                'user_id' => $userID,
-                'file_id' => $file->id,
-            ]);
-                $file->status = 0;
+                Booking::create([
+                    'user_id' => $userID,
+                    'file_id' => $file->id,
+                ]);
+                $file->status = 1;
                 $file->save();
             }
             DB::commit();
             return ResponseService::success("Files successfully reserved");
         } catch (\Exception $e) {
-            DB::rollBack(); 
+            DB::rollBack();
             return  ResponseService::validation("An error occurred: " . $e->getMessage());
         }
     }
 }
-
-
-

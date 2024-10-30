@@ -7,7 +7,9 @@ use App\Http\Requests\FileStoreRequest;
 use App\Models\File;
 use App\Models\GroupFile;
 use App\Models\Groups;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class FileController extends Controller
@@ -17,6 +19,7 @@ class FileController extends Controller
         try {
             $input = $request->all();
             $input['path'] = $this->uploadeimage($request);
+            $input['user_id'] =  Auth::user()->id;
             $file = File::create($input);
             return response()->json([
                 'file' => $file,
@@ -40,9 +43,6 @@ class FileController extends Controller
         }
     }
 
-
-
-
     public function deActiveStatus(string $id)
     {
         $file =   File::find($id);
@@ -55,16 +55,20 @@ class FileController extends Controller
         return response()->json('file not found');
     }
 
-    public function destroy(string $id , $groupId)
+    public function destroy($id)
     {
-        
-        $file =   File::find($id);
-        if ($file) {
-            $file->delete();
-            return response()->json('you are delete successfully');
-        }
-        return response()->json('file not found');
+        $file = File::findOrFail($id);
+        $file->delete();
+        return response()->json(['message' => 'File deleted successfully'], 200);
     }
+
+
+
+
+
+
+
+
 
 
     public function updateFileInGroup(Request $request)

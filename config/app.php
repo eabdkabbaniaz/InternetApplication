@@ -159,6 +159,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+       
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -186,13 +187,15 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Nwidart\Modules\LaravelModulesServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
+        Modules\Groups\App\Providers\GroupsServiceProvider::class,
+
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
