@@ -11,6 +11,7 @@
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "mailjet/mailjet-apiv3-php": "^1.6",
         "nwidart/laravel-modules": "^10.0",
         "spatie/laravel-permission": "^6.9"
     },
