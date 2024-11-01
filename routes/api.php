@@ -73,6 +73,7 @@ Route::group(['prefix' => 'Booking'], function () {
 
 Route::group(['prefix' => 'Profile'], function () {
     Route::get('showProfile', [ProfileUserController::class, 'showProfile'])->middleware(['auth:sanctum']);
+    Route::get('showFile', [ProfileUserController::class, 'showFile'])->middleware(['auth:sanctum']);
 });
 Route::group(['prefix' => 'GroupUser'], function () {
     Route::post('store', [UserGroupController::class, 'store'])->middleware(['auth:sanctum']);

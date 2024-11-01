@@ -9,13 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileUserController extends Controller
 {
-    public function showProfile(){
+    public function showProfile()
+    {
 
-        $userID= Auth::user()->id;
+        $userID = Auth::user()->id;
         $data = User::with('groups')->find($userID);
         return response()->json([
             'data' => $data
-    ]);
-        
+        ]);
+    }
+    public function showFile()
+    {
+
+        $userID = Auth::user()->id;
+        $data = User::with('fileReservation')->find($userID);
+        return response()->json([
+            'data' => $data
+        ]);
     }
 }

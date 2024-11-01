@@ -59,4 +59,8 @@ class User extends Authenticatable
     {
         return $this->groups()->where('group_id', $groupId)->where('is_admin', false)->exists();
     }
+    public function fileReservation()
+    {
+        return $this->belongsToMany(File::class,'bookings');
+    }
 }
