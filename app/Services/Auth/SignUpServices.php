@@ -19,11 +19,11 @@ class SignUpServices
     public function confirmAccount($data){
       try{
       $verificationCode = rand(100000, 999999);
-      $data['verificationCode'] = $verificationCode;
+      $data['verificationCode'] = (string)$verificationCode;
       Mail::raw("Your verification code is: {$verificationCode}", function ($message) use ($data) {
           $message->from('walaaalrehawi@gmail.com', 'walaa')
               ->to($data['email'])
-              ->subject(' Verification Code ');
+              ->subject(' Verification Code ');    
       });
       return ResponseService::success("massege was sending", $data);
   } catch (Exception $e) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\Profile\ProfileUserController;
 use App\Http\Controllers\UserController;
 use App\Mail\AccountConfirmationMail;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,10 +25,10 @@ use Illuminate\Support\Facades\Mail;
 */
 
 //Route::namespace('App\Modules\Groups\Http\Controllers')->group(base_path('app/Modules/Groups/Http/Routes/api.php'));
-Route::group(['prefix' => 'Group'], function () {
+Route::group(['prefix' => 'Group' , 'middleware'=>['auth:sanctum']], function () {
     Route::post('store', [GroupController::class, 'store'])->middleware(['auth:sanctum']);
-    Route::delete('destroy/{id}', [GroupController::class, 'destroy']);
-    Route::patch('update/{id}', [GroupController::class, 'update']);
+    Route::delete('destroy/{groupId}', [GroupController::class, 'destroy'])->middleware('check.group.admin');
+    Route::patch('update/{groupId}', [GroupController::class, 'update'])->middleware('check.group.admin');
     Route::get('index', [GroupController::class, 'index']);
     Route::get('showAllFiles/{id}', [GroupController::class, 'showAllFiles']);
 });
@@ -75,7 +76,7 @@ Route::group(['prefix' => 'Profile'], function () {
     Route::get('showProfile', [ProfileUserController::class, 'showProfile'])->middleware(['auth:sanctum']);
     Route::get('showFile', [ProfileUserController::class, 'showFile'])->middleware(['auth:sanctum']);
 });
-Route::group(['prefix' => 'GroupUser'], function () {
+Route::group(['prefix' => 'GroupUser','middleware' => 'cors'], function () {
     Route::post('store', [UserGroupController::class, 'store'])->middleware(['auth:sanctum']);
     Route::post('show', [UserGroupController::class, 'show'])->middleware(['auth:sanctum']);
     Route::get('getRoleUser/{groupID}', [UserGroupController::class, 'getRoleUser'])->middleware(['auth:sanctum']);

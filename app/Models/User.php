@@ -61,6 +61,6 @@ class User extends Authenticatable
     }
     public function fileReservation()
     {
-        return $this->belongsToMany(File::class,'bookings');
+        return $this->belongsToMany(File::class,'bookings')->where('status',1);
     }
 }

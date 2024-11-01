@@ -53,10 +53,11 @@ class GroupController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$groupId)
     {
+        
         try {
-            $groupID = $request->id;
+            $groupID = $groupId;
             $data = $request->all();
             $group = $this->groupService->updateGroup($groupID, $data);
             return $group
