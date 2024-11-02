@@ -31,4 +31,8 @@ class FileRepository implements FileRepositoryInterface
         $file->status = 0;
         $this->saveFile($file);   // حفظ التعديلات
     }
+    public function update($file ,$data)
+    {
+       return  $file->update($data);
+    }
 }

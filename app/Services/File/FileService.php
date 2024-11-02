@@ -3,30 +3,34 @@
 namespace App\Services\File;
 
 use App\Http\Requests\FileStoreRequest;
+use App\Http\Responses\ResponseService;
+use App\Models\Version;
 use App\Repositories\FileRepositoryInterface;   // استخدام الواجهة
+use App\Repositories\VersionRepository;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\Auth;
+use App\Models\File;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class FileService
 {
     protected $fileRepo;
     protected $imageService;
+    protected $versionRepository;
 
-    public function __construct(FileRepositoryInterface $fileRepo, ImageService $imageService)
+    public function __construct(FileRepositoryInterface $fileRepo, ImageService $imageService ,VersionRepository $versionRepository)
     {
-        $this->fileRepo = $fileRepo;           // حقن الواجهة
+        $this->fileRepo = $fileRepo;         
         $this->imageService = $imageService;
+        $this->versionRepository= $versionRepository;
     }
 
     public function storeFile(FileStoreRequest $request)
     {
         $input = $request->all();
-
-        // تحميل الصورة باستخدام ImageService
         $input['path'] = $this->imageService->uploadImage($request, 'path', 'uploads/File/');
         $input['user_id'] = Auth::user()->id;
-
-        // إنشاء الملف باستخدام ملف `FileRepository`
         return $this->fileRepo->createFile($input);
     }
 
@@ -49,4 +53,34 @@ class FileService
         }
         return ['data' => ['error' => 'File not found'], 'status' => 404];
     }
+    public function update($request){
+      
+        try {
+        $fileId= $request->id;
+        $file=$this->fileRepo->findFileById($fileId);
+        $version['name']= $file->name;
+        $version['file_id']=$file->id;
+        $version['path']=  $file['path'];
+        $this->versionRepository->Create($version);
+        $data['path']= $this->imageService->uploadImage($request,  'path', 'uploads/File/');
+        $file=$this->fileRepo->update($file,$data);
+        return ResponseService::success('File updated successfully!');
+        } 
+        catch (\Exception $e) {
+            return ResponseService::validation('Failed to upload file: '. $e->getMessage());
+
+        }   
+}
+
+public function getVersions($id)
+{
+    try {
+    $filesVersions = $this->versionRepository->getVersions($id);
+    return ResponseService::success('version show succ',$filesVersions);
+    } 
+    catch (\Exception $e) {
+        return ResponseService::validation('Failed to upload file: '. $e->getMessage());
+    }   
+}
+
 }

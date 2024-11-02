@@ -8,5 +8,6 @@ interface FileRepositoryInterface
     public function findFileById($id);               // لإيجاد ملف بناءً على ID
     public function saveFile($file);                 // لحفظ أي تعديلات في الملف
     public function deleteFile($file);               // لحذف ملف
+    public function update($file ,$data);               // لحذف ملف
     public function deactivateFileStatus($file);     // لتغيير حالة الملف إلى غير مفعل
 }

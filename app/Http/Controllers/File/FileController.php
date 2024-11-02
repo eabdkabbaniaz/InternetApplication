@@ -59,54 +59,45 @@ class FileController extends Controller
 
     public function update(Request $request)
     {
-        try {
-        $fileID =  $request->id;
-        $file = File::findOrFail($fileID);
+        // try {
+        // $fileID =  $request->id;
+        // $file = File::findOrFail($fileID);
 
-        $data = $request->all();
+        // $data = $request->all();
        
-        if ($request->hasFile('path')) {
-        $data['path'] = $this->uploadeimage($request);
-        $file->path = $data['path'];
-        $file->save();
+        // if ($request->hasFile('path')) {
+        // $data['path'] = $this->uploadeimage($request);
+        // $file->path = $data['path'];
+        // $file->save();
 
-        DB::table("versions")->insert([
-            'name' => $request->name,
-            'file_id' => $fileID,
-            'path' => $file->path,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        // DB::table("versions")->insert([
+        //     'name' => $request->name,
+        //     'file_id' => $fileID,
+        //     'path' => $file->path,
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now()
+        // ]);
 
-        }
+        // }
         
-        $file->update($data);
+        // $file->update($data);
 
-        return response()->json([
-            'file' => $file,
-            'message' => 'File updated successfully!'
-        ], 200);
+        // return response()->json([
+        //     'file' => $file,
+        //     'message' => 'File updated successfully!'
+        // ], 200);
           
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => 'Failed to upload file: ' . $e->getMessage()
-            ], 500);
-        }   
+        // } catch (\Exception $e) {
+        //     return response()->json([
+        //         'error' => 'Failed to upload file: ' . $e->getMessage()
+        //     ], 500);
+        // }   
+        // return $request->id;
+       return  $this->fileService->update($request);
     }
 
     public function getVersions($id)
     {
-        $filesVersions = Version::all();
-        $versions = [];
-    
-        foreach ($filesVersions as $fileVersion) {
-            if ($fileVersion->file_id == $id) {
-                $versions[] = $fileVersion;
-            }
-        }
-    
-        return response()->json([
-            'versions' => $versions
-        ]);
+        return  $this->fileService->getVersions($id);
     }
 }
