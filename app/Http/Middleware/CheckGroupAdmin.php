@@ -21,6 +21,7 @@ class CheckGroupAdmin
         $user =    User::find($userID);
 
         $groupId = $request->route('groupId');
+        
         if (!$user || !$user->isAdmin($groupId)) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }

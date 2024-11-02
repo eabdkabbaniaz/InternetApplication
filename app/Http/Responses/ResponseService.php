@@ -29,7 +29,7 @@ class ResponseService
     {
         return response()->json([
             'massage' => $message,
-            'state' =>400 ,
+            'state' =>$code ,
             'data' =>$data,
         ], $code);
     }

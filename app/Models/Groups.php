@@ -11,6 +11,6 @@ class Groups extends Model
     protected $guarded = [];
 
 public function files(){
-    return $this->belongsToMany(File::class,'group_files','group_id')->withPivot('id');
+    return $this->hasMany(File::class,'group_id');
 }
 }

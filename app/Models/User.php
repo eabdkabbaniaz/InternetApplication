@@ -23,7 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone',
+        'confirmation_code',
     ];
 
     /**
@@ -58,5 +58,9 @@ class User extends Authenticatable
     public function isRegularUser($groupId)
     {
         return $this->groups()->where('group_id', $groupId)->where('is_admin', false)->exists();
+    }
+    public function fileReservation()
+    {
+        return $this->belongsToMany(File::class,'bookings')->where('status',1);
     }
 }
