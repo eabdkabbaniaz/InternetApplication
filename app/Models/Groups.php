@@ -14,7 +14,7 @@ public function files(){
     return $this->hasMany(File::class,'group_id');
 }
 public function users(){
-    return $this->belongsToMany(User::class,'group_users','group_id');
+    return $this->belongsToMany(User::class,'group_users','group_id')->where('is_admin',0);
 }
 
 }

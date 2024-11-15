@@ -24,4 +24,11 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
+    public function getUsersNotInGroup(int $groupId)
+    {
+        return User::whereDoesntHave('groups', function ($query) use ($groupId) {
+            $query->where('group_id', $groupId);
+        })->get();
+    }
+
 }

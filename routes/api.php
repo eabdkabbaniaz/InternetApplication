@@ -47,16 +47,8 @@ Route::group(['prefix' => 'Auth'], function () {
     Route::post('register', [LoginController::class, 'register']);
     Route::post('/confirm', [LoginController::class, 'confirmAccount']);
 
-    Route::get('send-test-email', function () {
-        $user = new \App\Models\User();
-        $user->email = 'eabdkabbani@gmail.com';
-        $user->confirmation_code = rand(100000, 999999);
-        Mail::to($user->email)->send(new AccountConfirmationMail($user->confirmation_code));
-    
-        return 'Email sent';
-    });
-    Route::post('updateFileInGroup', [filecontrollergruop::class, 'updateFileInGroup'])->middleware(['auth:sanctum']);
 
+    Route::post('updateFileInGroup', [filecontrollergruop::class, 'updateFileInGroup'])->middleware(['auth:sanctum']);
     Route::post('login', [LoginController::class, 'login']);
 });
 
@@ -69,6 +61,7 @@ Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum']], function ()
     ->middleware('check.file.delete');
     Route::patch('deActiveStatus/{id}', [filecontrollergruop::class, 'deActiveStatus']);
     Route::post('/update/{id}', [filecontrollergruop::class, 'update']); //
+    Route::post('/deActiveStatusRe', [filecontrollergruop::class, 'deActiveStatusRe']); //
     Route::get('/versions/{id}', [filecontrollergruop::class, 'getVersions']); //
 });
 Route::group(['prefix' => 'Booking'], function () {
@@ -84,11 +77,9 @@ Route::group(['prefix' => 'GroupUser','middleware' => ['cors', 'auth:sanctum']],
     Route::post('show', [UserGroupController::class, 'show'])->middleware(['auth:sanctum']);
     Route::get('getRoleUser/{groupID}', [UserGroupController::class, 'getRoleUser'])->middleware(['auth:sanctum']);
     Route::delete('/groupId/{groupId}/userId/{userId}', [UserGroupController::class, 'removeUser'])->middleware('check.group.admin');
-
-
+    Route::get('getUserByGroupId/groupId/{groupId}', [UserGroupController::class, 'getUserByGroupId'])->middleware(['auth:sanctum']);
+    Route::get('getUsersNotInGroup/groupId/{groupId}', [UserGroupController::class, 'getUsersNotInGroup'])->middleware(['auth:sanctum']);
 });
-
-
 
 // في ملف Routes/api.php
 // في ملف Routes/api.php

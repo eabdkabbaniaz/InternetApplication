@@ -41,6 +41,8 @@ class GroupUserRepository
         return false;
     }
 
+   
+
     public function getUserGroups(int $userId)
     {
         return User::with('groups')->findOrFail($userId);

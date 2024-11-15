@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Services\GroupUserService;
 use Illuminate\Support\Facades\Response;
 use App\Http\Responses;
+use App\Http\Responses\ApiResponse;
 
 class UserGroupController extends Controller
 {
@@ -71,14 +72,40 @@ class UserGroupController extends Controller
     {
         try {
             $removed = $this->groupUserService->removeUserFromGroup($groupId, $userId);
-
             if ($removed) {
-                return response()->json(['message' => 'تمت إزالة المستخدم من المجموعة بنجاح.'], 200);
+              return ApiResponse::success('',"تمت إزالة المستخدم من المجموعة بنجاح.");
             } else {
-                return response()->json(['message' => 'المستخدم غير موجود في هذه المجموعة.'], 404);
+                return ApiResponse::success('',"المستخدم غير موجود في هذه المجموعة.");
             }
         } catch (\Exception $e) {
             return Response::json(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 500);
         }
     }
+    public function getUserByGroupId($groupId)
+    {
+        try {
+        return    $removed = Groups::with('users')->findorFail($groupId);
+            if ($removed) {
+              return ApiResponse::success('',"تمت إزالة المستخدم من المجموعة بنجاح.");
+            } else {
+                return ApiResponse::success('',"المستخدم غير موجود في هذه المجموعة.");
+            }
+        } catch (\Exception $e) {
+            return Response::json(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 500);
+        }
+    }
+
+    public function getUsersNotInGroup($groupId)
+    {
+        try {
+            $users = $this->groupUserService->getUsersNotInGroup($groupId);
+
+            return Response::json([
+                'users' => $users,
+            ], 200);
+        } catch (\Exception $e) {
+            return Response::json(['error' => 'Failed to retrieve users: ' . $e->getMessage()], 500);
+        }
+    }
+
 }

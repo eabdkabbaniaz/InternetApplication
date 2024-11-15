@@ -4,14 +4,19 @@ namespace App\Services;
 
 use App\Repositories\GroupUserRepository;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\UserRepository;
+
 
 class GroupUserService
 {
     protected $groupUserRepository;
+    protected $userRepository;
 
-    public function __construct(GroupUserRepository $groupUserRepository)
+    public function __construct(GroupUserRepository $groupUserRepository, UserRepository $userRepository)
     {
         $this->groupUserRepository = $groupUserRepository;
+     
+        $this->userRepository = $userRepository;
     }
 
     // إضافة مستخدمين إلى مجموعة
@@ -38,5 +43,10 @@ class GroupUserService
     {
       
         return $this->groupUserRepository->getUserGroups($userId);
+    }
+
+    public function getUsersNotInGroup(int $groupId)
+    {
+        return $this->userRepository->getUsersNotInGroup($groupId);
     }
 }
