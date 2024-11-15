@@ -33,18 +33,7 @@ class FileController extends Controller
         }
     }
 
-    public function uploadeimage($request)
-    {
-
-        if ($request->hasFile('path')) {
-            $file = $request->file('path');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/File/', $filename);
-            return    $input['path'] = 'uploads/File/' . $filename;
-        }
-    }
-
+  
     public function deActiveStatus(string $id)
     {
         $result = $this->fileService->deactivateFileStatus($id);
@@ -59,40 +48,6 @@ class FileController extends Controller
 
     public function update(Request $request)
     {
-        // try {
-        // $fileID =  $request->id;
-        // $file = File::findOrFail($fileID);
-
-        // $data = $request->all();
-       
-        // if ($request->hasFile('path')) {
-        // $data['path'] = $this->uploadeimage($request);
-        // $file->path = $data['path'];
-        // $file->save();
-
-        // DB::table("versions")->insert([
-        //     'name' => $request->name,
-        //     'file_id' => $fileID,
-        //     'path' => $file->path,
-        //     'created_at' => Carbon::now(),
-        //     'updated_at' => Carbon::now()
-        // ]);
-
-        // }
-        
-        // $file->update($data);
-
-        // return response()->json([
-        //     'file' => $file,
-        //     'message' => 'File updated successfully!'
-        // ], 200);
-          
-        // } catch (\Exception $e) {
-        //     return response()->json([
-        //         'error' => 'Failed to upload file: ' . $e->getMessage()
-        //     ], 500);
-        // }   
-        // return $request->id;
        return  $this->fileService->update($request);
     }
 

@@ -63,4 +63,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(File::class,'bookings')->where('status',1);
     }
+   
 }

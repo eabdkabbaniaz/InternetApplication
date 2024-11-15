@@ -10,22 +10,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckGroupAdmin
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
+   
     public function handle(Request $request, Closure $next)
     {
-        $userID = Auth::user()->id;
-        $user =    User::find($userID);
-
-        $groupId = $request->route('groupId');
-        
-        if (!$user || !$user->isAdmin($groupId)) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+      
+        if (!Auth::check()) {
+            return response()->json([
+                'message' => 'Authentication required. Please log in.'
+            ], 401);
         }
-
+    
+        $userID = Auth::id(); 
+        $user = User::find($userID);
+    
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not found. Please log in with a valid account.'
+            ], 404);
+        }
+    
+        $groupId = $request->route('groupId'); 
+    
+        if (!$user->isAdmin($groupId)) {
+            return response()->json([
+                'message' => 'Unauthorized. You do not have admin access to this group.'
+            ], 403);
+        }
+    
         return $next($request);
     }
+    
 }
