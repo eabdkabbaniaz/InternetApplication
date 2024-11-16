@@ -9,6 +9,10 @@ use App\Repositories\FileRepositoryInterface;
 use App\Repositories\GroupRepository;
 use App\Repositories\GroupRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use GoAop\Aop\AspectKernel;
+
+use App\Aspects\LoggingAspect;
+use GoAop\Aop\Pointcut\Pointcut;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +31,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $kernel = App\Providers\AspectKernel::getInstance();
+        $kernel->init([ 
+            'debug' => true, 
+            'cacheDir' => storage_path('framework/aop'), 
+            'includePaths' => [app_path()] 
+        ]);
+
+        // ربط الـ Aspect بـ Pointcut مناسب
+        $kernel->addAspect(new LoggingAspect());
     }
 }
