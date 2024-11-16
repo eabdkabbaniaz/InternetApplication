@@ -1,13 +1,14 @@
 <?php
 namespace App\Actions\Group;
 
+use App\Repositories\GroupRepository;
 use App\Repositories\GroupRepositoryInterface;
 
 class CreateGroupAction
 {
     protected $groupRepository;
 
-    public function __construct(GroupRepositoryInterface $groupRepository)
+    public function __construct(GroupRepository $groupRepository)
     {
         $this->groupRepository = $groupRepository;
     }
