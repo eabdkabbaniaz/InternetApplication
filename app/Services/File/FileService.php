@@ -6,7 +6,7 @@ use App\Http\Requests\FileStoreRequest;
 use App\Http\Responses\ResponseService;
 use App\Jobs\UpdateFile;
 use App\Models\Version;
-use App\Repositories\FileRepositoryInterface;   // استخدام الواجهة
+use App\Repositories\FileRepository;
 use App\Repositories\VersionRepository;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ class FileService
     public $versionRepository;
     public $compareFiles;
 
-    public function __construct(compareFiles $compareFiles, FileRepositoryInterface $fileRepo, ImageService $imageService ,VersionRepository $versionRepository)
+    public function __construct(compareFiles $compareFiles, FileRepository $fileRepo, ImageService $imageService ,VersionRepository $versionRepository)
     {
         $this->fileRepo = $fileRepo;         
         $this->imageService = $imageService;

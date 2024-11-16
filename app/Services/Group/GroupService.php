@@ -2,7 +2,7 @@
 namespace App\Services\Group;
 
 use App\Http\Responses\ApiResponse;
-use App\Repositories\GroupRepositoryInterface;
+use App\Repositories\GroupRepository;
 use App\Actions\Group\CreateGroupAction;
 
 class GroupService
@@ -10,7 +10,7 @@ class GroupService
     protected $groupRepository;
     protected $createGroupAction;
 
-    public function __construct(GroupRepositoryInterface $groupRepository, CreateGroupAction $createGroupAction)
+    public function __construct(GroupRepository $groupRepository, CreateGroupAction $createGroupAction)
     {
         $this->groupRepository = $groupRepository;
         $this->createGroupAction = $createGroupAction;

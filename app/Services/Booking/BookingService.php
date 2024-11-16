@@ -5,14 +5,14 @@ namespace App\Services\Booking;
 use App\Http\Responses\ResponseService;
 use App\Models\File;
 use Illuminate\Support\Facades\Auth;
-use App\Repositories\BookingRepositoryInterface;
+use App\Repositories\BookingRepository;
 use Illuminate\Support\Facades\DB;
 
 class BookingService
 {
     protected $repo;
 
-    public function __construct(BookingRepositoryInterface $BookingRepo)
+    public function __construct(BookingRepository $BookingRepo)
     {
         $this->repo = $BookingRepo;
     }

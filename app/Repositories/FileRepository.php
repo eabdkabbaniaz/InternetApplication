@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\File;
 
-class FileRepository implements FileRepositoryInterface
+class FileRepository 
 {
     public function createFile(array $data)
     {

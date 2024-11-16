@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Version;
 
-class VersionRepository implements VersionRepositoryInterface
+class VersionRepository 
 {
     public function Create($data)
     {

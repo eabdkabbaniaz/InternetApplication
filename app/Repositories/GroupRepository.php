@@ -6,7 +6,7 @@ use App\Models\Groups;
 use App\Models\GroupUser;
 use Illuminate\Support\Facades\Auth;
 
-class GroupRepository implements GroupRepositoryInterface
+class GroupRepository
 {
 
     public function getAllGroups()

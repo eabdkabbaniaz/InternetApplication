@@ -7,7 +7,7 @@ use App\Models\Booking;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class BookingRepository implements BookingRepositoryInterface
+class BookingRepository 
 {
     public function storeBooking($data, $files)
     {
