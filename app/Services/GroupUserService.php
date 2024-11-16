@@ -2,32 +2,51 @@
 
 namespace App\Services;
 
-use App\Models\GroupUser;
+use App\Repositories\GroupUserRepository;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\UserRepository;
+
 
 class GroupUserService
 {
+    protected $groupUserRepository;
+    protected $userRepository;
+
+    public function __construct(GroupUserRepository $groupUserRepository, UserRepository $userRepository)
+    {
+        $this->groupUserRepository = $groupUserRepository;
+     
+        $this->userRepository = $userRepository;
+    }
+
+    // إضافة مستخدمين إلى مجموعة
     public function addUsersToGroup(int $groupId, array $userIds)
     {
-        $groupUsers = [];
-
-        foreach ($userIds as $userId) {
-            $groupUsers[] = GroupUser::create([
-                'group_id' => $groupId,
-                'user_id' => $userId,
-            ]);
-        }
-
-        return $groupUsers;
+        return $this->groupUserRepository->addMultipleUsersToGroup($groupId, $userIds);
     }
-    public function getUserRoleInGroup($groupID)
+
+    // استرجاع دور المستخدم في مجموعة معينة
+    public function getUserRoleInGroup(int $groupId)
     {
         $userID = Auth::user()->id;
+        return $this->groupUserRepository->getUserRoleInGroup($groupId, $userID);
+    }
 
-        $groupUser = GroupUser::where('user_id', $userID)
-            ->where('group_id', $groupID)
-            ->first();
+    // إزالة مستخدم من مجموعة
+    public function removeUserFromGroup(int $groupId, int $userId)
+    {
+        return $this->groupUserRepository->removeUserFromGroup($groupId, $userId);
+    }
 
-        return $groupUser;
+    // استرجاع مجموعات المستخدم
+    public function getUserGroups(int $userId)
+    {
+      
+        return $this->groupUserRepository->getUserGroups($userId);
+    }
+
+    public function getUsersNotInGroup(int $groupId)
+    {
+        return $this->userRepository->getUsersNotInGroup($groupId);
     }
 }

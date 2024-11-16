@@ -40,6 +40,7 @@ class FileService
 
     public function deactivateFileStatus($id)
     {
+        
         $file = $this->fileRepo->findFileById($id);
         if ($file) {
             $this->fileRepo->deactivateFileStatus($file);
