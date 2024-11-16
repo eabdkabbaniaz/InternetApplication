@@ -17,7 +17,7 @@ use App\Http\Responses\ApiResponse;
 
 class UserGroupController extends Controller
 {
-    
+
 
     protected $groupUserService;
 
@@ -73,9 +73,9 @@ class UserGroupController extends Controller
         try {
             $removed = $this->groupUserService->removeUserFromGroup($groupId, $userId);
             if ($removed) {
-              return ApiResponse::success('',"تمت إزالة المستخدم من المجموعة بنجاح.");
+                return ApiResponse::success('', "تمت إزالة المستخدم من المجموعة بنجاح.");
             } else {
-                return ApiResponse::success('',"المستخدم غير موجود في هذه المجموعة.");
+                return ApiResponse::success('', "المستخدم غير موجود في هذه المجموعة.");
             }
         } catch (\Exception $e) {
             return Response::json(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 500);
@@ -84,11 +84,11 @@ class UserGroupController extends Controller
     public function getUserByGroupId($groupId)
     {
         try {
-        return    $removed = Groups::with('users')->findorFail($groupId);
+            $removed = Groups::with('users')->findorFail($groupId);
             if ($removed) {
-              return ApiResponse::success('',"تمت إزالة المستخدم من المجموعة بنجاح.");
+                return ApiResponse::success('', "تمت إزالة المستخدم من المجموعة بنجاح.");
             } else {
-                return ApiResponse::success('',"المستخدم غير موجود في هذه المجموعة.");
+                return ApiResponse::success('', "المستخدم غير موجود في هذه المجموعة.");
             }
         } catch (\Exception $e) {
             return Response::json(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 500);
@@ -107,5 +107,4 @@ class UserGroupController extends Controller
             return Response::json(['error' => 'Failed to retrieve users: ' . $e->getMessage()], 500);
         }
     }
-
 }
