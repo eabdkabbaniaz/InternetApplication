@@ -20,64 +20,27 @@ class GroupController extends Controller
 
     public function index()
     {
-        try {
-            $groups = $this->groupService->getAllGroups();
-            return ApiResponse::success($groups);
-        } catch (\Exception $e) {
-            return ApiResponse::error('Failed to retrieve groups.', 500);
-        }
+            return  $this->groupService->getAllGroups();    
     }
-
 
     public function store(GroupStoreRequest $request)
     {
-        try {
-            $data = $request->validated();
-            $group = $this->groupService->createGroup($data);
-            return ApiResponse::success($group, 'Group created successfully', 201);
-        } catch (\Exception $e) {
-            return ApiResponse::error('Failed to create group.', 500);
-        }
+          return $this->groupService->createGroup($request->validated());
     }
-
 
     public function showAllFiles(string $id)
     {
-        try {
-            $groupFile = $this->groupService->getGroupFiles($id);
-            return $groupFile
-                ? ApiResponse::success($groupFile)
-                : ApiResponse::error('Group files not found.', 404);
-        } catch (\Exception $e) {
-            return ApiResponse::error('Failed to retrieve group files.', 500);
-        }
+          return $this->groupService->getGroupFiles($id);
     }
 
     public function update(Request $request,$groupId)
     {
-        
-        try {
-            $groupID = $groupId;
-            $data = $request->all();
-            $group = $this->groupService->updateGroup($groupID, $data);
-            return $group
-                ? ApiResponse::success($group, 'Group updated successfully.')
-                : ApiResponse::error('Group not found.', 404);
-        } catch (\Exception $e) {
-            return ApiResponse::error('Failed to update group.', 500);
-        }
+       return $this->groupService->updateGroup($groupId, $request->all());
     }
 
 
     public function destroy(string $id)
     {
-        try {
-            $deleted = $this->groupService->deleteGroup($id);
-            return $deleted
-                ? ApiResponse::success(null, 'Group deleted successfully.')
-                : ApiResponse::error('Group not found.', 404);
-        } catch (\Exception $e) {
-            return ApiResponse::error('Failed to delete group.', 500);
-        }
+       return $this->groupService->deleteGroup($id);
     }
 }

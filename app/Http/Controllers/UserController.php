@@ -21,31 +21,6 @@ class UserController extends Controller
         ]);
     }
 
-
-
-
-    // public function store(UserStoreRequest $request)
-    // {
-        
-    //     try {
-    //         $data = $request->all();
-    //         $data['password'] =   Hash::make($request->password);
-    //         $user = User::create($data);
-    //         $userID = $user->id;
-    //         GroupUser::create([
-    //             'user_id' => $userID,
-    //             'group_id' => $request->groupID
-    //         ]);
-    //         return response()->json([
-    //             'user' => $user,
-    //         ]);
-    //     } catch (Exception $ex) {
-    //         return $ex;
-    //     }
-    // }
-
-
-
     public function update(Request $request)
     {
 
