@@ -2,22 +2,31 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Login;
-use Illuminate\Support\Facades\DB;
+use App\Events\UserLoggedIn;
+use App\Models\Logging;
 
 class LogSuccessfulLogin
 {
-   
+    /**
+     * Create the event listener.
+     */
     public function __construct()
     {
+        //
     }
 
-    public function handle(Login $event)
+    /**
+     * Handle the event.
+     */
+    public function handle(UserLoggedIn $event)
     {
-        DB::table('loggings')->insert([
-            'user_id' => $event->user->id,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+$log = Logging::create([
+    'user_id' => $event->userId,
+    'created_at' => now(),
+    'updated_at' => now(),
+]);
+      
     }
+
+
 }

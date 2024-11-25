@@ -6,6 +6,7 @@ use App\Http\Controllers\File\FileController as filecontrollergruop;
 use App\Http\Controllers\Group\UserGroupController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\Profile\ProfileUserController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Mail\AccountConfirmationMail;
 use Illuminate\Http\Request;
@@ -45,12 +46,16 @@ Route::group(['prefix' => 'User'], function () {
 Route::group(['prefix' => 'Auth'], function () {
     Route::post('Register', [LoginController::class, 'Register']);
     Route::post('register', [LoginController::class, 'register']);
+    Route::post('logout', [LoginController::class, 'logout']);
     Route::post('/confirm', [LoginController::class, 'confirmAccount']);
 
 
     Route::post('updateFileInGroup', [filecontrollergruop::class, 'updateFileInGroup'])->middleware(['auth:sanctum']);
     Route::post('login', [LoginController::class, 'login']);
 });
+
+Route::get('downloadPDF', [ReportController::class, 'downloadPDF']);
+Route::get('generatePDF', [ReportController::class, 'generatefilePDF']);
 
 
 

@@ -65,17 +65,9 @@ class FileService
         $file=$this->fileRepo->findFileById($fileId);
         $path =$file->path;
         $data['path']= $this->imageService->uploadImage($request,  'path', 'uploads/File/');
-        $this->fileRepo->update($file,$data);
-        // return [$data['path'],$path];
-        // $path =$file->path;
+  
         dispatch(new UpdateFile([$path,$data['path']] , $file , $this->versionRepository,$this->compareFiles ));
 
-    //    $diff=$this->compareFiles->compareFiles($path ,$data['path']  );
-    //     $version['name']= $file->name;
-    //     $version['file_id']=$file->id;
-    //     $version['path']=  $file['path'];
-    //     $version['diff']=  $diff;
-    //     $tete= $this->versionRepository->Create($version);
         return ResponseService::success('File updated successfully!');
         } 
         catch (\Exception $e) {

@@ -32,4 +32,10 @@ class LoginController extends Controller
     {
             return $this->signUpServices->register($request->validated());          
     }
+
+
+    public function logout(Request $request){
+     return $this->signUpServices->Logout($request);
+    }
+
 }

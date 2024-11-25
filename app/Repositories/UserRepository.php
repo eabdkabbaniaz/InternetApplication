@@ -3,6 +3,7 @@
 namespace App\Repositories;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserRepository 
 {
@@ -31,4 +32,10 @@ class UserRepository
         })->get();
     }
 
+
+    public function logoutUser()
+    {
+
+       auth('sanctum')->user()->tokens()->delete();
+    }
 }

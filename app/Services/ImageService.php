@@ -14,7 +14,7 @@ class ImageService
         if ($request->hasFile($fileInputName)) {
             $file = $request->file($fileInputName);
             $name = $file->getClientOriginalName();
-            $filename = $name .'-'.time() . '.' . $file->getClientOriginalExtension();
+            $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = '/uploads/File/' . $filename;
             $dd = '/uploads/File';
            $file->move(public_path($dd),$filename);

@@ -19,7 +19,8 @@
         "phpoffice/phpword": "^1.3",
         "predis/predis": "^2.2",
         "spatie/laravel-permission": "^6.9",
-        "spatie/pdf-to-text": "^1.54"
+        "spatie/pdf-to-text": "^1.54",
+        "ytake/laravel-aspect": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

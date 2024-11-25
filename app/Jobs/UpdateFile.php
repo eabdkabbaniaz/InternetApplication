@@ -36,8 +36,9 @@ class UpdateFile implements ShouldQueue
     {
         $path = $this->path;
         $file = $this->file;
-        echo(1);
-        $diff=$this->compareFiles->compareFiles($path[0],$path[1]  );
+
+    $version=[];
+        $diff=$this->compareFiles->compareFiles(public_path($path[0]),public_path($path[1])  );
         $version['name']= $file->name;
         $version['file_id']=$file->id;
         $version['path']=  $file['path'];

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('path');
-            $table->string('diff');
+            $table->text('diff');
             $table->foreignId('file_id')->constrained('files')->onDelete('cascade');
             $table->timestamps();
         });

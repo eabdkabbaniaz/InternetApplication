@@ -9,4 +9,10 @@ class File extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function Version(){
+        return $this->hasMany(Version::class);
+    }
+    public function users(){
+        return $this->belongsTo(User::class,'user_id');
+    }
 }

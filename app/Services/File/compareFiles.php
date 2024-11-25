@@ -66,9 +66,14 @@ class compareFiles
     }
 
     function compareFiles($file1 ,$file2) {
-          $oldContent = $this->extractText($file1);
-             $newContent = $this->extractText(    $file2);
-        $diffOptions = [
+        // echo($file1);
+        // echo($file2);
+        $oldContent = $this->extractText($file1);
+        // echo($oldContent);
+          $newContent = $this->extractText(    $file2);
+        //   echo($newContent);
+
+          $diffOptions = [
             'context' => 0, 
             'ignoreLineEnding' => true,
             'ignoreWhitespace' => true,
