@@ -5,14 +5,18 @@ namespace App\Services\File;
 use App\Http\Requests\FileStoreRequest;
 use App\Http\Responses\ResponseService;
 use App\Models\Version;
-use App\Repositories\FileRepositoryInterface;   // استخدام الواجهة
+use App\Repositories\FileRepositoryInterface; 
 use App\Repositories\VersionRepository;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\File;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use PhpOffice\PhpWord\IOFactory as WordIOFactory;
+use PhpOffice\PhpSpreadsheet\IOFactory as SpreadsheetIOFactory;
+use Spatie\PdfToText\Pdf;
+use Jfcherng\Diff\DiffHelper;
+use Exception;
 class compareFiles
 {
     function extractText($filePath) {
@@ -61,23 +65,20 @@ class compareFiles
         return $text;
     }
 
-    function compareFiles() {
-        $oldContent = $this->extractText("D:\InternetApp\InternetApp\public\New Microsoft Word Document (4).docx");
-        $newContent = $this->extractText("D:\InternetApp\InternetApp\public\New Microsoft Word Document (5).docx");
+    function compareFiles($file1 ,$file2) {
+          $oldContent = $this->extractText($file1);
+             $newContent = $this->extractText(    $file2);
         $diffOptions = [
             'context' => 0, 
             'ignoreLineEnding' => true,
             'ignoreWhitespace' => true,
         ];
-
         $diff = DiffHelper::calculate($oldContent, $newContent, 'Unified', $diffOptions);
         $lines = explode("\n", $diff);
         array_shift($lines); 
-
         $addedCount = 0;
         $removedCount = 0;
         $resultLines = [];
-
         foreach ($lines as $line) {
             if (strpos($line, '+') === 0) {
                 $addedCount++;
@@ -97,8 +98,6 @@ class compareFiles
                 }
             }
         }
-
-        // إضافة عدد الأسطر الزائدة والمحذوفة في النهاية
         if ($addedCount > 0) {
             $resultLines[] = "Number of lines in addition: $addedCount)";
         }

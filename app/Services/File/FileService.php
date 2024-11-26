@@ -4,6 +4,7 @@ namespace App\Services\File;
 
 use App\Http\Requests\FileStoreRequest;
 use App\Http\Responses\ResponseService;
+use App\Jobs\UpdateFile;
 use App\Models\Version;
 use App\Repositories\FileRepositoryInterface;   // استخدام الواجهة
 use App\Repositories\VersionRepository;
@@ -17,13 +18,16 @@ class FileService
 {
     protected $fileRepo;
     protected $imageService;
-    protected $versionRepository;
+    public $versionRepository;
+    public $compareFiles;
 
-    public function __construct(FileRepositoryInterface $fileRepo, ImageService $imageService ,VersionRepository $versionRepository)
+    public function __construct(compareFiles $compareFiles, FileRepositoryInterface $fileRepo, ImageService $imageService ,VersionRepository $versionRepository)
     {
         $this->fileRepo = $fileRepo;         
         $this->imageService = $imageService;
         $this->versionRepository= $versionRepository;
+        $this->compareFiles= $compareFiles;
+
     }
 
     public function storeFile(FileStoreRequest $request)
@@ -59,12 +63,19 @@ class FileService
         try {
         $fileId= $request->id;
         $file=$this->fileRepo->findFileById($fileId);
-        $version['name']= $file->name;
-        $version['file_id']=$file->id;
-        $version['path']=  $file['path'];
-        $this->versionRepository->Create($version);
+        $path =$file->path;
         $data['path']= $this->imageService->uploadImage($request,  'path', 'uploads/File/');
-        $file=$this->fileRepo->update($file,$data);
+        $this->fileRepo->update($file,$data);
+        // return [$data['path'],$path];
+        // $path =$file->path;
+        dispatch(new UpdateFile([$path,$data['path']] , $file , $this->versionRepository,$this->compareFiles ));
+
+    //    $diff=$this->compareFiles->compareFiles($path ,$data['path']  );
+    //     $version['name']= $file->name;
+    //     $version['file_id']=$file->id;
+    //     $version['path']=  $file['path'];
+    //     $version['diff']=  $diff;
+    //     $tete= $this->versionRepository->Create($version);
         return ResponseService::success('File updated successfully!');
         } 
         catch (\Exception $e) {
