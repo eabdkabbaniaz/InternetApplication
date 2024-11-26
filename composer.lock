@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "397d26c11d464c5b1b0d819f3d8f15c1",
+    "content-hash": "b2b326df96ee03c2655b1c85bae978b0",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1409,6 +1409,54 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "jetbrains/phpstorm-stubs",
+            "version": "v2023.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/JetBrains/phpstorm-stubs.git",
+                "reference": "99d8bcab934ae5362f33660b1cd4b8c4d617c40b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/JetBrains/phpstorm-stubs/zipball/99d8bcab934ae5362f33660b1cd4b8c4d617c40b",
+                "reference": "99d8bcab934ae5362f33660b1cd4b8c4d617c40b",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "@stable",
+                "nikic/php-parser": "@stable",
+                "php": "^8.0",
+                "phpdocumentor/reflection-docblock": "@stable",
+                "phpunit/phpunit": "^9.6"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "PhpStormStubsMap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "PHP runtime & extensions header files for PhpStorm",
+            "homepage": "https://www.jetbrains.com/phpstorm",
+            "keywords": [
+                "autocomplete",
+                "code",
+                "inference",
+                "inspection",
+                "jetbrains",
+                "phpstorm",
+                "stubs",
+                "type"
+            ],
+            "support": {
+                "source": "https://github.com/JetBrains/phpstorm-stubs/tree/v2023.3"
+            },
+            "time": "2023-11-01T18:52:29+00:00"
         },
         {
             "name": "jfcherng/php-color-output",
@@ -2854,6 +2902,51 @@
             "time": "2024-03-31T07:05:07+00:00"
         },
         {
+            "name": "microsoft/tolerant-php-parser",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/microsoft/tolerant-php-parser.git",
+                "reference": "3eccfd273323aaf69513e2f1c888393f5947804b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/microsoft/tolerant-php-parser/zipball/3eccfd273323aaf69513e2f1c888393f5947804b",
+                "reference": "3eccfd273323aaf69513e2f1c888393f5947804b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5.15"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Microsoft\\PhpParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Lourens",
+                    "email": "roblou@microsoft.com"
+                }
+            ],
+            "description": "Tolerant PHP-to-AST parser designed for IDE usage scenarios",
+            "support": {
+                "issues": "https://github.com/microsoft/tolerant-php-parser/issues",
+                "source": "https://github.com/microsoft/tolerant-php-parser/tree/v0.1.2"
+            },
+            "time": "2022-10-05T17:30:19+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.8.0",
             "source": {
@@ -3064,6 +3157,75 @@
             "time": "2024-06-03T19:18:41+00:00"
         },
         {
+            "name": "nette/php-generator",
+            "version": "v4.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/php-generator.git",
+                "reference": "c90961e782ae86e517fe5ed732eb2b512945565b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/php-generator/zipball/c90961e782ae86e517fe5ed732eb2b512945565b",
+                "reference": "c90961e782ae86e517fe5ed732eb2b512945565b",
+                "shasum": ""
+            },
+            "require": {
+                "nette/utils": "^3.2.9 || ^4.0",
+                "php": "8.0 - 8.4"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "dev-master",
+                "nette/tester": "^2.4",
+                "nikic/php-parser": "^4.18 || ^5.0",
+                "phpstan/phpstan": "^1.0",
+                "tracy/tracy": "^2.8"
+            },
+            "suggest": {
+                "nikic/php-parser": "to use ClassType::from(withBodies: true) & ClassType::fromCode()"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0-only",
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 8.3 features.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "code",
+                "nette",
+                "php",
+                "scaffolding"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/php-generator/issues",
+                "source": "https://github.com/nette/php-generator/tree/v4.1.6"
+            },
+            "time": "2024-09-10T09:31:55+00:00"
+        },
+        {
             "name": "nette/schema",
             "version": "v1.3.2",
             "source": {
@@ -3210,6 +3372,96 @@
                 "source": "https://github.com/nette/utils/tree/v4.0.5"
             },
             "time": "2024-08-07T15:39:19+00:00"
+        },
+        {
+            "name": "ngmy/laravel.aop",
+            "version": "0.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ngmy/Laravel.Aop.git",
+                "reference": "935daff7c57af42b41ca7d45c270dc44121fbf5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ngmy/Laravel.Aop/zipball/935daff7c57af42b41ca7d45c270dc44121fbf5e",
+                "reference": "935daff7c57af42b41ca7d45c270dc44121fbf5e",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0 || ^10.0 || ^11.0",
+                "olvlvl/composer-attribute-collector": "*",
+                "php": "^8.1",
+                "ray/aop": "^2.10.1",
+                "spatie/file-system-watcher": "^1.2",
+                "symfony/finder": "*"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.8",
+                "ergebnis/composer-normalize": "^2.42",
+                "larastan/larastan": "^2.9",
+                "mockery/mockery": "^1.6",
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
+                "phpstan/extension-installer": "^1.3"
+            },
+            "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "bin-links": false,
+                    "forward-command": true,
+                    "target-directory": "vendor-bin"
+                },
+                "composer-attribute-collector": {
+                    "include": [
+                        "tests/Feature/Aspects/Cache/stubs",
+                        "tests/Feature/Aspects/Logging/stubs",
+                        "tests/Feature/Aspects/Retry/stubs",
+                        "tests/Feature/Aspects/Transaction/stubs",
+                        "tests/Feature/stubs"
+                    ]
+                },
+                "laravel": {
+                    "providers": [
+                        "Ngmy\\LaravelAop\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ngmy\\LaravelAop\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yuta Nagamiya",
+                    "email": "y.nagamiya@gmail.com"
+                }
+            ],
+            "description": "Laravel.Aop integrates Ray.Aop with Laravel.",
+            "homepage": "https://github.com/ngmy/Laravel.Aop",
+            "keywords": [
+                "aop",
+                "aspect",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/ngmy/Laravel.Aop/issues",
+                "source": "https://github.com/ngmy/Laravel.Aop/tree/0.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://flattr.com/@ngmy",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/ngmy",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-18T07:10:47+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -3436,6 +3688,518 @@
                 }
             ],
             "time": "2024-01-28T10:04:15+00:00"
+        },
+        {
+            "name": "okapi/aop",
+            "version": "1.2.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/okapi-web/php-aop.git",
+                "reference": "943439946ab63e2c3aeadd512487e7e0e655e832"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/okapi-web/php-aop/zipball/943439946ab63e2c3aeadd512487e7e0e655e832",
+                "reference": "943439946ab63e2c3aeadd512487e7e0e655e832",
+                "shasum": ""
+            },
+            "require": {
+                "nette/php-generator": "^4.0",
+                "okapi/code-transformer": "1.3.7",
+                "okapi/singleton": "^1.0",
+                "okapi/wildcards": "^1.0",
+                "php": ">=8.1",
+                "php-di/php-di": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10.3",
+                "symfony/console": "^6.3",
+                "symfony/var-dumper": "^6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Okapi\\Aop\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WalterWoshid",
+                    "email": "wotschel.valentin@googlemail.com",
+                    "homepage": "https://github.com/WalterWoshid"
+                }
+            ],
+            "description": "PHP AOP is a PHP library that provides a powerful Aspect Oriented Programming (AOP) implementation for PHP.",
+            "homepage": "https://github.com/okapi-web/php-aop",
+            "keywords": [
+                "aop",
+                "aspect-oriented-programming",
+                "php",
+                "php-aop"
+            ],
+            "support": {
+                "issues": "https://github.com/okapi-web/php-aop/issues",
+                "source": "https://github.com/okapi-web/php-aop/tree/1.2.15"
+            },
+            "time": "2024-09-07T17:19:25+00:00"
+        },
+        {
+            "name": "okapi/code-transformer",
+            "version": "1.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/okapi-web/php-code-transformer.git",
+                "reference": "e936378203c1cc3244d444a367d24df8f2bffe96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/okapi-web/php-code-transformer/zipball/e936378203c1cc3244d444a367d24df8f2bffe96",
+                "reference": "e936378203c1cc3244d444a367d24df8f2bffe96",
+                "shasum": ""
+            },
+            "require": {
+                "microsoft/tolerant-php-parser": "^0.1.2",
+                "okapi/filesystem": "^1.0",
+                "okapi/path": "^1.0",
+                "okapi/singleton": "^1.0",
+                "okapi/wildcards": "^1.0",
+                "php": ">=8.1",
+                "php-di/php-di": "^7.0",
+                "roave/better-reflection": "^6.8"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^10",
+                "symfony/var-dumper": "^6.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Okapi\\CodeTransformer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WalterWoshid",
+                    "email": "wotschel.valentin@googlemail.com",
+                    "homepage": "https://github.com/WalterWoshid"
+                }
+            ],
+            "description": "PHP Code Transformer is a PHP library that allows you to modify and transform the source code of a loaded PHP class.",
+            "homepage": "https://github.com/okapi-web/php-code-transformer",
+            "keywords": [
+                "code",
+                "php",
+                "php-code",
+                "transformer"
+            ],
+            "support": {
+                "issues": "https://github.com/okapi-web/php-code-transformer/issues",
+                "source": "https://github.com/okapi-web/php-code-transformer/tree/1.3.7"
+            },
+            "time": "2024-09-07T17:14:03+00:00"
+        },
+        {
+            "name": "okapi/filesystem",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/okapi-web/php-filesystem.git",
+                "reference": "51d40c0e4156de316e6df55e42f7453b20fa2b9b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/okapi-web/php-filesystem/zipball/51d40c0e4156de316e6df55e42f7453b20fa2b9b",
+                "reference": "51d40c0e4156de316e6df55e42f7453b20fa2b9b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "phpunit/phpunit": ">=9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Okapi\\Filesystem\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WalterWoshid",
+                    "email": "wotschel.valentin@googlemail.com",
+                    "homepage": "https://github.com/WalterWoshid"
+                }
+            ],
+            "description": "PHP Filesystem is a PHP library that provides an abstraction layer for the filesystem.",
+            "homepage": "https://github.com/okapi-web/php-filesystem",
+            "keywords": [
+                "directory",
+                "file",
+                "filesystem",
+                "folder",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/okapi-web/php-filesystem/issues",
+                "source": "https://github.com/okapi-web/php-filesystem/tree/1.0.0"
+            },
+            "time": "2023-02-18T14:35:00+00:00"
+        },
+        {
+            "name": "okapi/path",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/okapi-web/php-path.git",
+                "reference": "4186a1c01fed0b10e9d474d56e91257fc4863fcf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/okapi-web/php-path/zipball/4186a1c01fed0b10e9d474d56e91257fc4863fcf",
+                "reference": "4186a1c01fed0b10e9d474d56e91257fc4863fcf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Okapi\\Path\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WalterWoshid",
+                    "email": "wotschel.valentin@googlemail.com",
+                    "homepage": "https://github.com/WalterWoshid"
+                }
+            ],
+            "description": "PHP Path is a PHP library that provides utilities for handling file paths.",
+            "homepage": "https://github.com/okapi-web/php-path",
+            "keywords": [
+                "file",
+                "filesystem",
+                "path",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/okapi-web/php-path/issues",
+                "source": "https://github.com/okapi-web/php-path/tree/1.0.0"
+            },
+            "time": "2023-02-17T23:19:15+00:00"
+        },
+        {
+            "name": "okapi/singleton",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/okapi-web/php-singleton.git",
+                "reference": "5f35f5a1307dde7584b63a7a9b2ed7148a5e8987"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/okapi-web/php-singleton/zipball/5f35f5a1307dde7584b63a7a9b2ed7148a5e8987",
+                "reference": "5f35f5a1307dde7584b63a7a9b2ed7148a5e8987",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Okapi\\Singleton\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WalterWoshid",
+                    "email": "wotschel.valentin@googlemail.com",
+                    "homepage": "https://github.com/WalterWoshid"
+                }
+            ],
+            "description": "PHP Singleton is a PHP library that allows you to create singleton classes with a trait.",
+            "homepage": "https://github.com/okapi-web/php-singleton",
+            "keywords": [
+                "php",
+                "singleton",
+                "trait"
+            ],
+            "support": {
+                "issues": "https://github.com/okapi-web/php-singleton/issues",
+                "source": "https://github.com/okapi-web/php-singleton/tree/1.0.3"
+            },
+            "time": "2023-03-09T10:04:06+00:00"
+        },
+        {
+            "name": "okapi/wildcards",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/okapi-web/php-wildcards.git",
+                "reference": "c2d96ffd4c39d1fe2f0b571341abd334b18ca896"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/okapi-web/php-wildcards/zipball/c2d96ffd4c39d1fe2f0b571341abd334b18ca896",
+                "reference": "c2d96ffd4c39d1fe2f0b571341abd334b18ca896",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Okapi\\Wildcards\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Walter Woshid",
+                    "email": "wotschel.valentin@googlemail.com",
+                    "homepage": "https://github.com/WalterWoshid"
+                }
+            ],
+            "description": "PHP Wildcards is a PHP library that converts wildcards to regular expressions.",
+            "homepage": "https://github.com/okapi-web/php-wildcards",
+            "keywords": [
+                "php",
+                "wildcard",
+                "wildcard matching",
+                "wildcards"
+            ],
+            "support": {
+                "issues": "https://github.com/okapi-web/php-wildcards/issues",
+                "source": "https://github.com/okapi-web/php-wildcards/tree/1.0.1"
+            },
+            "time": "2023-06-05T15:32:19+00:00"
+        },
+        {
+            "name": "olvlvl/composer-attribute-collector",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/olvlvl/composer-attribute-collector.git",
+                "reference": "a3d45a2e9bab87e31d07652c47d12a6bcc7ac2b1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/olvlvl/composer-attribute-collector/zipball/a3d45a2e9bab87e31d07652c47d12a6bcc7ac2b1",
+                "reference": "a3d45a2e9bab87e31d07652c47d12a6bcc7ac2b1",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "php": ">=8.0"
+            },
+            "require-dev": {
+                "composer/composer": ">=2.4",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "olvlvl\\ComposerAttributeCollector\\Plugin",
+                "composer-attribute-collector": {
+                    "include": [
+                        "tests"
+                    ],
+                    "exclude": [
+                        "tests/Acme/PSR4/IncompatibleSignature.php"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "olvlvl\\ComposerAttributeCollector\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Laviale",
+                    "email": "olivier.laviale@gmail.com",
+                    "homepage": "https://olvlvl.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A convenient and near zero-cost way to retrieve targets of PHP 8 attributes",
+            "support": {
+                "issues": "https://github.com/olvlvl/composer-attribute-collector/issues",
+                "source": "https://github.com/olvlvl/composer-attribute-collector/tree/v2.0.1"
+            },
+            "time": "2023-10-28T01:59:22+00:00"
+        },
+        {
+            "name": "php-di/invoker",
+            "version": "2.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-DI/Invoker.git",
+                "reference": "33234b32dafa8eb69202f950a1fc92055ed76a86"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-DI/Invoker/zipball/33234b32dafa8eb69202f950a1fc92055ed76a86",
+                "reference": "33234b32dafa8eb69202f950a1fc92055ed76a86",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3",
+                "psr/container": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1.8",
+                "mnapoli/hard-mode": "~0.3.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Invoker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generic and extensible callable invoker",
+            "homepage": "https://github.com/PHP-DI/Invoker",
+            "keywords": [
+                "callable",
+                "dependency",
+                "dependency-injection",
+                "injection",
+                "invoke",
+                "invoker"
+            ],
+            "support": {
+                "issues": "https://github.com/PHP-DI/Invoker/issues",
+                "source": "https://github.com/PHP-DI/Invoker/tree/2.3.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-09-08T09:24:21+00:00"
+        },
+        {
+            "name": "php-di/php-di",
+            "version": "7.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-DI/PHP-DI.git",
+                "reference": "e87435e3c0e8f22977adc5af0d5cdcc467e15cf1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/e87435e3c0e8f22977adc5af0d5cdcc467e15cf1",
+                "reference": "e87435e3c0e8f22977adc5af0d5cdcc467e15cf1",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/serializable-closure": "^1.0",
+                "php": ">=8.0",
+                "php-di/invoker": "^2.0",
+                "psr/container": "^1.1 || ^2.0"
+            },
+            "provide": {
+                "psr/container-implementation": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "friendsofphp/proxy-manager-lts": "^1",
+                "mnapoli/phpunit-easymock": "^1.3",
+                "phpunit/phpunit": "^9.5",
+                "vimeo/psalm": "^4.6"
+            },
+            "suggest": {
+                "friendsofphp/proxy-manager-lts": "Install it if you want to use lazy injection (version ^1)"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "DI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The dependency injection container for humans",
+            "homepage": "https://php-di.org/",
+            "keywords": [
+                "PSR-11",
+                "container",
+                "container-interop",
+                "dependency injection",
+                "di",
+                "ioc",
+                "psr11"
+            ],
+            "support": {
+                "issues": "https://github.com/PHP-DI/PHP-DI/issues",
+                "source": "https://github.com/PHP-DI/PHP-DI/tree/7.0.7"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/php-di/php-di",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-07-21T15:55:45+00:00"
         },
         {
             "name": "phpoffice/math",
@@ -4684,6 +5448,120 @@
             "time": "2024-11-15T15:30:01+00:00"
         },
         {
+            "name": "roave/better-reflection",
+            "version": "6.25.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Roave/BetterReflection.git",
+                "reference": "d5cdeb995a8d755ef5dc49e69e158dd71f81b955"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Roave/BetterReflection/zipball/d5cdeb995a8d755ef5dc49e69e158dd71f81b955",
+                "reference": "d5cdeb995a8d755ef5dc49e69e158dd71f81b955",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "jetbrains/phpstorm-stubs": "2023.3",
+                "nikic/php-parser": "^4.18.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.2",
+                "roave/signature": "^1.8.0"
+            },
+            "conflict": {
+                "thecodingmachine/safe": "<1.1.3"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^12.0.0",
+                "phpstan/phpstan": "^1.10.60",
+                "phpstan/phpstan-phpunit": "^1.3.16",
+                "phpunit/phpunit": "^10.5.12",
+                "roave/infection-static-analysis-plugin": "^1.34.0",
+                "vimeo/psalm": "5.23.0"
+            },
+            "suggest": {
+                "composer/composer": "Required to use the ComposerSourceLocator"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Roave\\BetterReflection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Titcumb",
+                    "email": "james@asgrim.com",
+                    "homepage": "https://github.com/asgrim"
+                },
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "https://ocramius.github.io/"
+                },
+                {
+                    "name": "Gary Hockin",
+                    "email": "gary@roave.com",
+                    "homepage": "https://github.com/geeh"
+                },
+                {
+                    "name": "Jaroslav Hanslík",
+                    "email": "kukulich@kukulich.cz",
+                    "homepage": "https://github.com/kukulich"
+                }
+            ],
+            "description": "Better Reflection - an improved code reflection API",
+            "support": {
+                "issues": "https://github.com/Roave/BetterReflection/issues",
+                "source": "https://github.com/Roave/BetterReflection/tree/6.25.0"
+            },
+            "time": "2024-03-10T12:00:48+00:00"
+        },
+        {
+            "name": "roave/signature",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Roave/Signature.git",
+                "reference": "f92ce20f82c9a1df3b50fc56fbdaeb82cf4c9c5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Roave/Signature/zipball/f92ce20f82c9a1df3b50fc56fbdaeb82cf4c9c5b",
+                "reference": "f92ce20f82c9a1df3b50fc56fbdaeb82cf4c9c5b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^12.0.0",
+                "infection/infection": "^0.26.19",
+                "phpunit/phpunit": "^9.6.7",
+                "vimeo/psalm": "^5.9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Roave\\Signature\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Sign and verify stuff",
+            "support": {
+                "issues": "https://github.com/Roave/Signature/issues",
+                "source": "https://github.com/Roave/Signature/tree/1.8.0"
+            },
+            "time": "2023-11-25T00:11:29+00:00"
+        },
+        {
             "name": "sabberworm/php-css-parser",
             "version": "v8.7.0",
             "source": {
@@ -4747,6 +5625,66 @@
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v8.7.0"
             },
             "time": "2024-10-27T17:38:32+00:00"
+        },
+        {
+            "name": "spatie/file-system-watcher",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/file-system-watcher.git",
+                "reference": "d9511ecbd266f190c4abce88516c3f231fcb6bfe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/file-system-watcher/zipball/d9511ecbd266f190c4abce88516c3f231fcb6bfe",
+                "reference": "d9511ecbd266f190c4abce88516c3f231fcb6bfe",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "symfony/process": "^5.2|^6.0|^7.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5",
+                "spatie/ray": "^1.22",
+                "spatie/temporary-directory": "^2.0",
+                "vimeo/psalm": "^4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Watcher\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Watch changes in the file system using PHP",
+            "homepage": "https://github.com/spatie/file-system-watcher",
+            "keywords": [
+                "file-system-watcher",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/file-system-watcher/issues",
+                "source": "https://github.com/spatie/file-system-watcher/tree/1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-18T14:26:25+00:00"
         },
         {
             "name": "spatie/laravel-permission",

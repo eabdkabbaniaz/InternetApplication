@@ -39,6 +39,9 @@ return $pdf->download("walaa.$request->ex");
 
 public static function generatePDF(Request $request)
 {
+    
+
+    
     // $token = PersonalAccessToken::findToken($request->bearerToken());
     $user = User::find($request->id);
     $userdata = Logging::withTrashed()->whereBetween('created_at', [$request->start, $request->end])
@@ -51,6 +54,12 @@ return ApiResponse::success($userdata , $name);
 }
 public static function generatefilePDF(Request $request)
 {
+
+    // if($request->start==null){
+    //     $request->start =10-10-2020;
+    //     $request->end = Carbon::now();
+    // }
+
     // $token = PersonalAccessToken::findToken($request->bearerToken());
      $Group = Groups::where('id',$request->group_id)->with('files.Version','files.users')->first();
    foreach($Group->files as $u){
@@ -64,7 +73,7 @@ public static function generatefilePDF(Request $request)
 
    }
 }
-// return $Group;
+return $Group;
 // return view('groupReport',compact('Group'));
 $pdf = \PDF::loadView('groupReport',compact('Group'));   
 $filePath = 'public/user_'. time() . '.' . $request->ex;

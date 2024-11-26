@@ -195,6 +195,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         Modules\Groups\App\Providers\GroupsServiceProvider::class,
+        Ngmy\LaravelAop\ServiceProvider::class,
 
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
