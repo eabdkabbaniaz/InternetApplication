@@ -10,9 +10,9 @@ use App\Repositories\GroupRepository;
 use App\Repositories\GroupRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use GoAop\Aop\AspectKernel;
-
-use App\Aspects\LoggingAspect;
-use GoAop\Aop\Pointcut\Pointcut;
+use App\Aop\LoggingAspect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,14 +31,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $kernel = App\Providers\AspectKernel::getInstance();
-        $kernel->init([ 
-            'debug' => true, 
-            'cacheDir' => storage_path('framework/aop'), 
-            'includePaths' => [app_path()] 
-        ]);
-
-        // ربط الـ Aspect بـ Pointcut مناسب
-        $kernel->addAspect(new LoggingAspect());
+        DB::listen(function ($query) {
+            Log::info('Query Executed', [
+                'sql' => $query->sql,
+                'bindings' => $query->bindings,
+                'time' => $query->time,
+                'api_user' => request()->user()?->id ?? 'guest', // ربط الاستعلام بالمستخدم
+            ]);
+        });
+        // تأكد من أن الـ Aspect مضاف إلى الـ Kernel
     }
 }
