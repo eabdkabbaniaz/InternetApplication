@@ -46,6 +46,34 @@ class UserController extends Controller
 
 
 
+    // في وحدة التحكم الخاصة بك:
+public function showRequests()
+{
+     $requests = DB::table('telescope_entries')
+        ->where('type', 'request')
+        ->orderBy('created_at', 'desc')
+        ->get();
+        foreach($requests as $r){
+            $array = explode(",", $r->content);
+            // return $array[1];
+            // $add[]=;
+            $array1[] = explode(",", $array[1]);
+        }
+        // return $array1;
+      foreach($array1 as $ar){
+        // return $ar[0];
+          $arr=  explode("/", $ar[0])  ;
+          $array2[]= $arr[ count($arr) - 1  ];
+
+      }
+
+return $array2;
+
+    return view('requests', compact('requests'));
+}
+
+
+
     public function update(Request $request)
     {
 

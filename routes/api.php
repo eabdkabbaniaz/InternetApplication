@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Mail;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::get('showRequests', [UserController::class, 'showRequests']);
 
 //Route::namespace('App\Modules\Groups\Http\Controllers')->group(base_path('app/Modules/Groups/Http/Routes/api.php'));
 Route::group(['prefix' => 'Group' , 'middleware'=>['auth:sanctum']], function () {
