@@ -34,10 +34,10 @@ class FileController extends Controller
     }
 
   
-    public function deActiveStatus(string $id)
+    public function deActiveStatus(Request $request)
     {
-        $result = $this->fileService->deactivateFileStatus($id);
-        return response()->json($result['data'], $result['status']);
+        return $this->fileService->deactivateFileStatus($request);
+        // return response()->json($result['data'], $result['status']);
     }
 
     public function destroy($id)

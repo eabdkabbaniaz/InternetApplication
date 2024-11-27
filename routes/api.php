@@ -64,7 +64,7 @@ Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum']], function ()
     Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])->middleware('check.group.admin');
     Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])
     ->middleware('check.file.delete');
-    Route::patch('deActiveStatus/{id}', [filecontrollergruop::class, 'deActiveStatus']);
+    Route::post('deActiveStatus', [filecontrollergruop::class, 'deActiveStatus']);
     Route::post('/update/{id}', [filecontrollergruop::class, 'update']); //
     Route::post('/deActiveStatusRe', [filecontrollergruop::class, 'deActiveStatusRe']); //
     Route::get('/versions/{id}', [filecontrollergruop::class, 'getVersions']); //
@@ -91,4 +91,5 @@ Route::group(['prefix' => 'GroupUser','middleware' => ['cors', 'auth:sanctum']],
 
 
 
-
+//90H8Id4NB3m3Hpilhi0Vw1rX2JTsGtH5MWoxV739125014af omar token
+// lC99tymr3WiISuVwSYOn6xZFJ9UOIZ5y3FeZ5gTR2159de00 ammar token

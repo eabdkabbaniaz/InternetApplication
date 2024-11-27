@@ -38,15 +38,27 @@ class FileService
         return $this->fileRepo->createFile($input);
     }
 
-    public function deactivateFileStatus($id)
+    public function deactivateFileStatus($request)
     {
-        
-        $file = $this->fileRepo->findFileById($id);
-        if ($file) {
-            $this->fileRepo->deactivateFileStatus($file);
-            return ['data' => ['file' => $file, 'message' => 'تم تحرير الملف'], 'status' => 200];
+        $fileIds = $request->filesID;
+        if (empty($fileIds)) {
+            return ResponseService::error("No file IDs provided");
         }
-        return ['data' => ['error' => 'File not found'], 'status' => 404];
+        $files = File::whereIn('id', $fileIds)->get();
+        // foreach ($files as $file) {
+        //     if ($file->status == 1) {
+        //         return ResponseService::error("Reservation cancelled because $file->name file were already reserved");
+        //     }
+        // }
+        return $this->fileRepo->deactivateFileStatus($request,$files);
+
+
+        // $file = $this->fileRepo->findFileById($id);
+        // if ($file) {
+        //     $this->fileRepo->deactivateFileStatus($file);
+        //     return ['data' => ['file' => $file, 'message' => 'تم تحرير الملف'], 'status' => 200];
+        // }
+        // return ['data' => ['error' => 'File not found'], 'status' => 404];
     }
 
     public function deleteFile($id)

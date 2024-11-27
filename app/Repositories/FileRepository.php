@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Repositories;
+use App\Http\Responses\ResponseService;
+
 
 use App\Models\File;
 
@@ -26,11 +28,17 @@ class FileRepository
         $file->delete();           // حذف ملف
     }
 
-    public function deactivateFileStatus($file)
+    public function deactivateFileStatus($request, $fileIds)
     {
-        $file->status = 0;
-        $this->saveFile($file);   // حفظ التعديلات
+            foreach ($fileIds as $file) {
+              
+                $file->status = 0;
+                $file->save();
+            }
+
+            return ResponseService::success("Files successfully unreserved");
     }
+
     public function update($file ,$data)
     {
        return  $file->update($data);
