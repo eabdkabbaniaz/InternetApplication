@@ -13,13 +13,14 @@ use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use App\Models\File;
 use View;
 
 class ReportController extends Controller
 {
     protected $reportServices;
+
 
     public function __construct(ReportService $reportServices)
     {
@@ -57,19 +58,4 @@ public  function DownloaduserPDF(Request $request)
  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
