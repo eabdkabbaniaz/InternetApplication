@@ -21,15 +21,22 @@ Route::get('/', function () {
 });
 
 Route::get('/{filename}')->name('download.file');
+
+
+
+
 Route::get('/active', function () {
     
 //  return   event(new   FolderEvent('hello world'));
   
-    $userId = 1; // معرف المستخدم
+    // $userId = 1; // معرف المستخدم
 
-    $fileId = 12; // معرف الملف
+    // $fileId = 12; // معرف الملف
 
     // استرجاع جميع الأنشطة المتعلقة بالملف (مثل من قام بتعديله أو إضافته)
 return  $activities = \Spatie\Activitylog\Models\Activity::
-        where('subject_id', 22)  // يحدد النشاطات المرتبطة بالملف (عن طريق معرفه)
-        ->get();});
+        where('subject_id',5 )  // يحدد النشاطات المرتبطة بالملف (عن طريق معرفه)
+        ->get();})->name('active');
+
+        
+        
