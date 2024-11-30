@@ -28,6 +28,8 @@ class UserGroupController extends Controller
     }
     public function store(AddUsersToGroupRequest $request)
     {
+
+
         try {
             $groupId = $request->groupId;
             $group = Groups::findOrFail($groupId);
