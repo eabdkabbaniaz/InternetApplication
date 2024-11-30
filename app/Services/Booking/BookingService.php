@@ -2,6 +2,7 @@
 
 namespace App\Services\Booking;
 
+use App\Events\FolderEvent;
 use App\Http\Responses\ResponseService;
 use App\Models\Booking;
 use App\Models\File;
@@ -34,33 +35,45 @@ class BookingService
     }
 
 
-      public function getBookingsByPivotIds(array $pivotIds)
-      {
-          return Booking::whereIn('id', $pivotIds)->get();
-      }
-  
-      public function updateFilesStatus(array $fileIds)
-      {
-          File::whereIn('id', $fileIds)->update(['status' => 0]);
-      }
-  
-      public function deleteBookings(array $pivotIds)
-      {
-          Booking::whereIn('id', $pivotIds)->delete();
-      }
+    public function getBookingsByPivotIds(array $pivotIds)
+    {
+        return Booking::whereIn('id', $pivotIds)->get();
+    }
 
-      public function cancelBooking(array $pivotIds)
-      {
-          DB::transaction(function () use ($pivotIds) {
-              $bookings = $this->repo->getBookingsByPivotIds($pivotIds);
-                $fileIds = $bookings->pluck('file_id')->toArray();
-                $this->repo->updateFilesStatus($fileIds);
-                $this->repo->deleteBookings($pivotIds);
-          });
-      }
+    public function updateFilesStatus(array $fileIds)
+    {
+        File::whereIn('id', $fileIds)->update(['status' => 0]);
+    }
 
-      public function getUserFilesInGroup($userId, $groupId)
-      {
-          return $this->repo->getUserFilesInGroup($userId, $groupId);
-      }
+   
+
+    public function cancelBooking(array $pivotIds, $groupId)
+    {
+        DB::beginTransaction();
+        try {
+            $bookings = $this->repo->getBookingsWithFiles($pivotIds);
+            $fileIds = $bookings->pluck('file.id')->toArray();
+            $fileNames = $bookings->pluck('file.name')->toArray();
+            $groupName = $bookings->first()?->file?->group?->name ?? 'No Group';
+            $this->repo->updateFilesStatus($fileIds);
+            $this->repo->deleteBookings($pivotIds);
+            event(new FolderEvent("تم فك حجز الملفات التالية", $fileNames, $groupId, $groupName));
+            DB::commit();
+            return ResponseService::success("Bookings canceled successfully");
+        } catch (\Exception $e) {
+            DB::rollback();
+            return ResponseService::error("Failed to cancel bookings");
+        }
+    }
+
+
+    public function getUserFilesInGroup($userId, $groupId)
+    {
+        try {
+            $data = $this->repo->getUserFilesInGroup($userId, $groupId);
+            return ResponseService::success("Files retrieved successfully", $data);
+        } catch (\Exception $e) {
+            return ResponseService::error("Failed to retrieve files");
+        }
+    }
 }

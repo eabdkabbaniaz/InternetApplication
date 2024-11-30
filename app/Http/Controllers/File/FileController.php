@@ -35,16 +35,7 @@ class FileController extends Controller
     }
 
 
-    public function deActiveStatus(string $id)
-    {
-        $result = $this->fileService->deactivateFileStatus($id);
-        return response()->json($result['data'], $result['status']);
-    }
-    public function deActiveStatus1(string $id)
-    {
-        $result = $this->fileService->deactivateFileStatus($id);
-        return response()->json($result['data'], $result['status']);
-    }
+   
 
     public function destroy($id)
     {
@@ -52,32 +43,13 @@ class FileController extends Controller
         return response()->json($result['data'], $result['status']);
     }
 
-    public function update(Request $request, $id)
-    {
-        $file = File::find($id);
-        if ($file) {
-            $file->update($request->all());
-            return "hjldsa";
-        }
-        return "kjdf";
-        //return  $this->fileService->update($request);
-    }
+ 
 
     public function getVersions($id)
     {
         return  $this->fileService->getVersions($id);
     }
 
-    public function cancelBooking(Request $request)
-{
  
-    $pivotId = $request->input('pivot_id'); 
-    DB::transaction(function () use ($pivotId) {
-        $bookings = Booking::whereIn('id', $pivotId)->get();
-        $fileIds = $bookings->pluck('file_id')->toArray();
-        File::whereIn('id', $fileIds)->update(['status' => 0]);
-        Booking::whereIn('id', $pivotId)->delete();
-    });
-}
 
 }

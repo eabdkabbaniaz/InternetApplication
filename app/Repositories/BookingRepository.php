@@ -37,11 +37,17 @@ class BookingRepository
     }
 
     
-    public function getBookingsByPivotIds(array $pivotIds)
+   
+    public function getBookingsWithFiles(array $pivotIds)
     {
-        return Booking::whereIn('id', $pivotIds)->get();
+        return Booking::whereIn('id', $pivotIds)
+            ->with([
+                'file:id,name,group_id',
+                'file.group:id,name'    
+            ])
+            ->get();
     }
-
+    
     
     public function updateFilesStatus(array $fileIds)
     {

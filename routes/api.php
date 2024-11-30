@@ -76,15 +76,12 @@ Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum','logRequest']]
 });
 Route::group(['prefix' => 'Booking'], function () {
     Route::post('store', [BookingController::class, 'store'])->middleware(['auth:sanctum']);
-    Route::post('/cancelBooking', [BookingController::class, 'cancelBooking'])->middleware(['auth:sanctum']); //
+    Route::post('/cancelBooking/groupId/{groupId}', [BookingController::class, 'cancelBooking'])->middleware(['auth:sanctum']); //
     Route::get('showFile/groupId/{id}', [BookingController::class, 'showFile'])->middleware(['auth:sanctum']);
 
 });
 
-Route::group(['prefix' => 'Profile'], function () {
-    Route::get('showProfile', [ProfileUserController::class, 'showProfile'])->middleware(['auth:sanctum']);
-    Route::get('showFile/groupId/{id}', [ProfileUserController::class, 'showFile'])->middleware(['auth:sanctum']);
-});
+
 Route::group(['prefix' => 'GroupUser','middleware' => ['cors', 'auth:sanctum']], function () {
     Route::post('store', [UserGroupController::class, 'store'])->middleware(['auth:sanctum']);
     Route::post('show', [UserGroupController::class, 'show'])->middleware(['auth:sanctum']);

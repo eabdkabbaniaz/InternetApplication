@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
@@ -11,27 +10,32 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
 class FolderEvent implements ShouldBroadcast
-
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-   
-    
-
     public $message;
+    public $fileNames;
+    public $groupId;
+    public $groupName; 
 
-  public function __construct($message)
-  {
-      $this->message = $message;
-  }
+    public function __construct($message, array $fileNames, $groupId, $groupName)
+    {
+        $this->message = $message;
+        $this->fileNames = $fileNames;
+        $this->groupId = $groupId;
+        $this->groupName = $groupName;
+    }
 
     public function broadcastOn()
     {
-        return  ['my-channel'];
+        return new PrivateChannel("group-{$this->groupId}");
     }
 
     public function broadcastAs()
     {
-        return 'my-event';
+        return 'folder-event';
     }
 }
+
+
+

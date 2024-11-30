@@ -38,16 +38,16 @@ class FileService
         return $this->fileRepo->createFile($input);
     }
 
-    public function deactivateFileStatus($id)
-    {
+    // public function deactivateFileStatus($id)
+    // {
         
-        $file = $this->fileRepo->findFileById($id);
-        if ($file) {
-            $this->fileRepo->deactivateFileStatus($file);
-            return ['data' => ['file' => $file, 'message' => 'تم تحرير الملف'], 'status' => 200];
-        }
-        return ['data' => ['error' => 'File not found'], 'status' => 404];
-    }
+    //     $file = $this->fileRepo->findFileById($id);
+    //     if ($file) {
+    //         $this->fileRepo->deactivateFileStatus($file);
+    //         return ['data' => ['file' => $file, 'message' => 'تم تحرير الملف'], 'status' => 200];
+    //     }
+    //     return ['data' => ['error' => 'File not found'], 'status' => 404];
+    // }
 
     public function deleteFile($id)
     {
