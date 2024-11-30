@@ -54,23 +54,26 @@ Route::group(['prefix' => 'Auth'], function () {
 
 
 
-Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum']], function () {
+Route::group(['prefix' => 'File', 'middleware' => ['auth:sanctum','logRequest']], function () {
     Route::post('store', [filecontrollergruop::class, 'store']);
     Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])->middleware('check.group.admin');
     Route::delete('destroy/{id}/{groupId}', [filecontrollergruop::class, 'destroy'])
     ->middleware('check.file.delete');
     Route::patch('deActiveStatus/{id}', [filecontrollergruop::class, 'deActiveStatus']);
-    Route::post('/update/{id}', [filecontrollergruop::class, 'update']); //
+    Route::patch('/update/{id}', [filecontrollergruop::class, 'update']); //
     Route::post('/deActiveStatusRe', [filecontrollergruop::class, 'deActiveStatusRe']); //
     Route::get('/versions/{id}', [filecontrollergruop::class, 'getVersions']); //
 });
 Route::group(['prefix' => 'Booking'], function () {
     Route::post('store', [BookingController::class, 'store'])->middleware(['auth:sanctum']);
+    Route::post('/cancelBooking', [BookingController::class, 'cancelBooking'])->middleware(['auth:sanctum']); //
+    Route::get('showFile/groupId/{id}', [BookingController::class, 'showFile'])->middleware(['auth:sanctum']);
+
 });
 
 Route::group(['prefix' => 'Profile'], function () {
     Route::get('showProfile', [ProfileUserController::class, 'showProfile'])->middleware(['auth:sanctum']);
-    Route::get('showFile', [ProfileUserController::class, 'showFile'])->middleware(['auth:sanctum']);
+    Route::get('showFile/groupId/{id}', [ProfileUserController::class, 'showFile'])->middleware(['auth:sanctum']);
 });
 Route::group(['prefix' => 'GroupUser','middleware' => ['cors', 'auth:sanctum']], function () {
     Route::post('store', [UserGroupController::class, 'store'])->middleware(['auth:sanctum']);
