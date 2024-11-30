@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Http\Responses\ResponseService;
 use App\Models\Booking;
+use App\Models\File;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -33,4 +35,31 @@ class BookingRepository
             return ResponseService::validation("An error occurred: " . $e->getMessage());
         }
     }
+
+    
+    public function getBookingsByPivotIds(array $pivotIds)
+    {
+        return Booking::whereIn('id', $pivotIds)->get();
+    }
+
+    
+    public function updateFilesStatus(array $fileIds)
+    {
+        File::whereIn('id', $fileIds)->update(['status' => 0]);
+    }
+
+   
+    public function deleteBookings(array $pivotIds)
+    {
+        Booking::whereIn('id', $pivotIds)->delete();
+    }
+
+    public function getUserFilesInGroup($userId, $groupId)
+{
+    return User::with(['fileReservation' => function ($query) use ($groupId) {
+        $query->where('group_id', $groupId);
+    }])
+    ->findOrFail($userId);  
+}
+
 }

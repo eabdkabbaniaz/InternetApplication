@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ReportController;
+use App\Events\FolderEvent;
 use Illuminate\Support\Facades\Route;
+use Spatie\Activitylog\Models\Activity;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,15 @@ Route::get('/', function () {
 });
 
 Route::get('/{filename}')->name('download.file');
+Route::get('/active', function () {
+    
+//  return   event(new   FolderEvent('hello world'));
+  
+    $userId = 1; // معرف المستخدم
+
+    $fileId = 12; // معرف الملف
+
+    // استرجاع جميع الأنشطة المتعلقة بالملف (مثل من قام بتعديله أو إضافته)
+return  $activities = \Spatie\Activitylog\Models\Activity::
+        where('subject_id', 22)  // يحدد النشاطات المرتبطة بالملف (عن طريق معرفه)
+        ->get();});

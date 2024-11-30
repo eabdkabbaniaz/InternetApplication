@@ -4,6 +4,7 @@ namespace App\Http\Controllers\File;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FileStoreRequest;
+use App\Models\Booking;
 use App\Models\File;
 use App\Models\GroupFile;
 use App\Models\Groups;
@@ -33,8 +34,13 @@ class FileController extends Controller
         }
     }
 
-  
+
     public function deActiveStatus(string $id)
+    {
+        $result = $this->fileService->deactivateFileStatus($id);
+        return response()->json($result['data'], $result['status']);
+    }
+    public function deActiveStatus1(string $id)
     {
         $result = $this->fileService->deactivateFileStatus($id);
         return response()->json($result['data'], $result['status']);
@@ -46,13 +52,32 @@ class FileController extends Controller
         return response()->json($result['data'], $result['status']);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-       return  $this->fileService->update($request);
+        $file = File::find($id);
+        if ($file) {
+            $file->update($request->all());
+            return "hjldsa";
+        }
+        return "kjdf";
+        //return  $this->fileService->update($request);
     }
 
     public function getVersions($id)
     {
         return  $this->fileService->getVersions($id);
     }
+
+    public function cancelBooking(Request $request)
+{
+ 
+    $pivotId = $request->input('pivot_id'); 
+    DB::transaction(function () use ($pivotId) {
+        $bookings = Booking::whereIn('id', $pivotId)->get();
+        $fileIds = $bookings->pluck('file_id')->toArray();
+        File::whereIn('id', $fileIds)->update(['status' => 0]);
+        Booking::whereIn('id', $pivotId)->delete();
+    });
+}
+
 }

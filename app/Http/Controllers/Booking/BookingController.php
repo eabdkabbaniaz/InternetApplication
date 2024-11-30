@@ -26,5 +26,22 @@ class BookingController extends Controller
     {
         return $this->bookingService->store($request);
     }
+
+    public function cancelBooking(Request $request)
+    {
+        $pivotIds = $request->input('pivot_ids'); 
+        $this->bookingService->cancelBooking($pivotIds);  
+       // return   event(new   FolderEvent('hello world'));
+        return response()->json(['message' => 'Bookings canceled successfully']);
+    }
+        public function showFile($groupId)
+        {
+            $userID = Auth::user()->id;
+            $data = $this->bookingService->getUserFilesInGroup($userID, $groupId);
+    
+            return response()->json([
+                'data' => $data
+            ]);
+        }
    
 }

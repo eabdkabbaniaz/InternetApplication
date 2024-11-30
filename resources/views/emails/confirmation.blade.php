@@ -8,3 +8,4 @@
     <p>رمز التأكيد الخاص بك هو: {{ $confirmationCode }}</p>
 </body>
 </html>
+

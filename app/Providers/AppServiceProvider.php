@@ -9,6 +9,10 @@ use App\Repositories\FileRepositoryInterface;
 use App\Repositories\GroupRepository;
 use App\Repositories\GroupRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use GoAop\Aop\AspectKernel;
+use App\Aop\LoggingAspect;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +31,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        DB::listen(function ($query) {
+            Log::info('Query Executed', [
+                'sql' => $query->sql,
+                'bindings' => $query->bindings,
+                'time' => $query->time,
+                'api_user' => request()->user()?->id ?? 'guest', // ربط الاستعلام بالمستخدم
+            ]);
+        });
+        // تأكد من أن الـ Aspect مضاف إلى الـ Kernel
     }
 }

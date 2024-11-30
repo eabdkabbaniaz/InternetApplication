@@ -61,7 +61,10 @@ class User extends Authenticatable
     }
     public function fileReservation()
     {
-        return $this->belongsToMany(File::class,'bookings')->where('status',1);
+        return $this->belongsToMany(File::class, 'bookings')
+                    ->whereNull('bookings.deleted_at')  // إضافة شرط لعدم إرجاع الحجوزات المحذوفة
+                    ->withPivot('id');
     }
+    
    
 }

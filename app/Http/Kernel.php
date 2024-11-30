@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'check.group.admin' => \App\Http\Middleware\CheckGroupAdmin::class,
         'check.file.delete' => \App\Http\Middleware\CheckFileDelete::class,
         'cors' => \App\Http\Middleware\CorsMiddleware::class,
+        'logRequest' => \App\Http\Middleware\LogRequest::class,
     ];
 }
