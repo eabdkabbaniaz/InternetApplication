@@ -12,6 +12,7 @@
         "jfcherng/php-diff": "^6.16",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.3",
+        "laravel/telescope": "^5.2",
         "laravel/tinker": "^2.8",
         "mailjet/mailjet-apiv3-php": "^1.6",
         "nwidart/laravel-modules": "^10.0",

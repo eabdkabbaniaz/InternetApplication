@@ -65,8 +65,9 @@ class FileService
         $file=$this->fileRepo->findFileById($fileId);
         $path =$file->path;
         $data['path']= $this->imageService->uploadImage($request,  'path', 'uploads/File/');
+        $user_id = Auth::user()->id;
   
-        dispatch(new UpdateFile([$path,$data['path']] , $file , $this->versionRepository,$this->compareFiles ));
+        dispatch(new UpdateFile([$path,$data['path']] ,$user_id, $file , $this->versionRepository,$this->compareFiles ));
 
         return ResponseService::success('File updated successfully!');
         } 

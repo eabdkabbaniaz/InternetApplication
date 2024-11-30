@@ -56,6 +56,11 @@ Route::group(['prefix' => 'Auth'], function () {
 
 Route::get('downloadPDF', [ReportController::class, 'downloadPDF']);
 Route::get('generatePDF', [ReportController::class, 'generatefilePDF']);
+Route::get('generateuserPDF', [ReportController::class, 'generateuserPDF']);
+Route::get('DownloadfilePDF', [ReportController::class, 'DownloadfilePDF']);
+Route::get('DownloaduserPDF', [ReportController::class, 'DownloaduserPDF']);
+Route::get('generatefile', [ReportController::class, 'generatefile']);
+Route::get('Downloadfile', [ReportController::class, 'Downloadfile']);
 
 
 

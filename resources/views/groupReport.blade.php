@@ -15,9 +15,9 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">{{$Group->name}}</h2>
+					<h2 class="heading-section">{{$data['name']}}</h2>
 					<div class="pl-3 email">
-						<span>'Added: {{$Group->created_at}}</span>
+						<span>'Added: {{$data['created_at']}}</span>
 						<br />
 						<span>Date of Report: {{ Carbon\Carbon::now()}}</span>
 					</div>
@@ -36,25 +36,24 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-              @forEach($Group->files as $data)
+              @forEach($data['files'] as $dat)
                     <tr class="alert" role="alert">
                     <td class="d-flex align-items-center">
                     <div class="img" style="background-image: url(images/person_3.jpg);"></div>
 						      	<div class="pl-3 email">
-						      		<span>{{$data->users->email}}</span>
-						      		<span>Added:{{$data->created_at}} </span>
+									<!-- {{$users=$dat['users']}} -->
+						      		<span>{{$dat['users']['email']}}</span>
+						      		<span>Added:{{$dat['created_at']}} </span>
 						      	</div></td>
-                   <td>{{$data->operation}}</td>
+                   <td>{{$dat['operation']}}</td>
                    <td class="status"><span class="active">
-                   <a href="{{ route('download.file', ['filename' =>$data->path]) }}" class="btn btn-link">
-                {{$data->name}}
+                   <a href="{{ route('download.file', ['filename' =>$dat['path']]) }}" class="btn btn-link">
+                {{$dat['name']}}
             </a>
             </span></td>
-            @if($data->operation=="Add")      
-            <td>{{$data->created_at}}</td>
-            @elseif($data->operation=="update")
-              <td>{{$data->updated_at}}</td>
-@endif
+    
+              <td>{{$dat['created_at']}}</td>
+
             						     
                     </tr>
    
