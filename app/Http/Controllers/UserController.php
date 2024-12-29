@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
+
+    
+
+   
     public function index()
     {
         $user = User::all();

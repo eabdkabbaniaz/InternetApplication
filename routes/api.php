@@ -55,10 +55,14 @@ Route::group(['prefix' => 'Auth'], function () {
 });
 
 Route::get('downloadPDF', [ReportController::class, 'downloadPDF']);
-Route::get('generatePDF', [ReportController::class, 'generatefilePDF']);
+//user report
 Route::get('generateuserPDF', [ReportController::class, 'generateuserPDF']);
-Route::get('DownloadfilePDF', [ReportController::class, 'DownloadfilePDF']);
 Route::get('DownloaduserPDF', [ReportController::class, 'DownloaduserPDF']);
+//group report
+Route::get('DownloadfilePDF', [ReportController::class, 'DownloadfilePDF']);
+Route::get('generatePDF', [ReportController::class, 'generatefilePDF']);
+
+//file report
 Route::get('generatefile', [ReportController::class, 'generatefile']);
 Route::get('Downloadfile', [ReportController::class, 'Downloadfile']);
 
@@ -86,10 +90,17 @@ Route::group(['prefix' => 'Booking'], function () {
 
 Route::group(['prefix' => 'GroupUser','middleware' => ['cors', 'auth:sanctum']], function () {
     Route::post('store', [UserGroupController::class, 'store'])->middleware(['auth:sanctum']);
+    Route::get('showfile/{id}', [filecontrollergruop::class, 'showfile'])->middleware(['auth:sanctum']);
+    Route::get('showmywaitingfile', [filecontrollergruop::class, 'showmywaitingfile'])->middleware(['auth:sanctum']);
+    Route::get('ActiveFile/{id}', [filecontrollergruop::class, 'ActiveFile'])->middleware(['auth:sanctum']);
     Route::post('show', [UserGroupController::class, 'show'])->middleware(['auth:sanctum']);
     Route::get('getRoleUser/{groupID}', [UserGroupController::class, 'getRoleUser'])->middleware(['auth:sanctum']);
     Route::delete('/groupId/{groupId}/userId/{userId}', [UserGroupController::class, 'removeUser'])->middleware('check.group.admin');
     Route::get('getUserByGroupId/groupId/{groupId}', [UserGroupController::class, 'getUserByGroupId'])->middleware(['auth:sanctum']);
+    Route::get('getUserwaiting/{groupId}', [UserGroupController::class, 'getUserwaiting'])->middleware(['auth:sanctum']);
+    Route::get('Acceptinvitation/{groupId}', [UserGroupController::class, 'Acceptinvitation'])->middleware(['auth:sanctum']);
+    Route::get('showWaitUser/{groupId}', [UserGroupController::class, 'showWaitUser'])->middleware(['auth:sanctum']);
+    Route::get('showWaitgroup', [UserGroupController::class, 'showWaitgroup'])->middleware(['auth:sanctum']);
     Route::get('getUsersNotInGroup/groupId/{groupId}', [UserGroupController::class, 'getUsersNotInGroup'])->middleware(['auth:sanctum']);
 });
 

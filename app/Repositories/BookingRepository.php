@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Events\Log;
 use App\Http\Responses\ResponseService;
 use App\Models\Booking;
 use App\Models\File;
@@ -25,6 +26,10 @@ class BookingRepository
                 
                 $file->status = 1;
                 $file->save();
+                $log['file_id']=$file->id;
+                $log['user_id']= $userID ;
+                $log['Oprationid']='B';        
+                event(new   Log($log));
             }
 
             DB::commit();
@@ -58,6 +63,7 @@ class BookingRepository
     public function deleteBookings(array $pivotIds)
     {
         Booking::whereIn('id', $pivotIds)->delete();
+
     }
 
     public function getUserFilesInGroup($userId, $groupId)

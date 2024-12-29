@@ -27,6 +27,7 @@ class BookingService
         }
         $files = File::whereIn('id', $fileIds)->lockForUpdate()->get();
         foreach ($files as $file) {
+
             if ($file->status == 1) {
                 return ResponseService::error("Reservation cancelled because $file->name file were already reserved");
             }

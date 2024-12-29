@@ -15,9 +15,9 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">{{$data['name']}}</h2>
+					<h2 class="heading-section">{{$data[0]['name']}}</h2>
 					<div class="pl-3 email">
-						<span>'Added: {{$data['created_at']}}</span>
+						<span>'Added: {{$data[0]['created_at']}}</span>
 						<br />
 						<span>Date of Report: {{ Carbon\Carbon::now()}}</span>
 					</div>
@@ -36,19 +36,26 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-              @forEach($data['files'] as $dat)
+              @forEach($data[1] as $dat)
                     <tr class="alert" role="alert">
                     <td class="d-flex align-items-center">
                     <div class="img" style="background-image: url(images/person_3.jpg);"></div>
 						      	<div class="pl-3 email">
 									<!-- {{$users=$dat['users']}} -->
-						      		<span>{{$dat['users']['email']}}</span>
+						      		<span>{{$dat['user']['email']}}</span>
 						      		<span>Added:{{$dat['created_at']}} </span>
 						      	</div></td>
-                   <td>{{$dat['operation']}}</td>
+								  @if($dat['Oprationid']=='A')
+								  <td>Add</td>
+                @elseif($dat['Oprationid']=='U')
+				<td>Update</td>
+                @elseif($dat['Oprationid']=='B')
+				<td>Booking</td>  
+              @endif
+                  
                    <td class="status"><span class="active">
-                   <a href="{{ route('download.file', ['filename' =>$dat['path']]) }}" class="btn btn-link">
-                {{$dat['name']}}
+                   <a href="{{ route('download.file', ['filename' =>$dat['file']['path']]) }}" class="btn btn-link">
+                {{$dat['file']['name']}}
             </a>
             </span></td>
     

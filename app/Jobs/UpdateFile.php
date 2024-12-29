@@ -41,7 +41,8 @@ class UpdateFile implements ShouldQueue
         $file = $this->file;
         $user_id = $this->user_id;
 // $user =Auth::user()->id;
-// echo 1;
+// echo $path[0];
+// echo $path[1];
 // echo $user;
     $version=[];
          $diff=$this->compareFiles->compareFiles(public_path($path[0]),public_path($path[1])  );

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
             $table->boolean('status')->default('0')->nullable()->comment('1 is reserved and 0 not reserved');
+            $table->boolean('Active')->default('0')->nullable()->comment('1 is active and 0 not active');
             $table->timestamps();
         });
     }

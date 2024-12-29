@@ -9,7 +9,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Logging extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $guarded = [];
-
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+    public function file(){
+        return $this->belongsTo(File::class,'file_id');
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Http\Responses\ApiResponse;
+use App\Models\GroupUser;
 use App\Repositories\GroupUserRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\UserRepository;
@@ -44,5 +46,53 @@ class GroupUserService
     public function getUsersNotInGroup(int $groupId)
     {
         return $this->userRepository->getUsersNotInGroup($groupId);
+    }
+    public function getUserwaiting(int $groupId)
+    {
+        try {
+            $user =$this->groupUserRepository->getUserwaiting($groupId);
+                return ApiResponse::success( $user, "Show succ");
+        } catch (\Exception $e) {
+            return ApiResponse::error(['error' => $e->getMessage()], 200);
+        }
+         
+    }
+
+    public function Acceptinvitation( $groupId)
+    {
+        try {
+            $group = $this->groupUserRepository->find($groupId);
+            $data['isAccept']=1;
+             $response= $this->groupUserRepository->Acceptinvitation($group ,$data);
+                return ApiResponse::success(   $response , "Show succ");
+        } catch (\Exception $e) {
+            return ApiResponse::error(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 200);
+        }
+       
+    }
+    // public function showWaitUser( $groupId)
+    // {
+    //     try {
+    //         $group = $this->groupUserRepository->showWaitUser($groupId);
+        
+    //             return ApiResponse::success(   $group , "Show succ");
+    //     } catch (\Exception $e) {
+    //         return ApiResponse::error(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 200);
+    //     }
+       
+    // }
+    public function showWaitgroup( )
+    {
+        try
+        {
+            $user = Auth::user()->id;
+            $group = $this->groupUserRepository->showWaitgroup($user);
+            return ApiResponse::success(   $group , "Show succ");
+        } 
+        catch (\Exception $e)
+        {
+            return ApiResponse::error(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 200);
+        }
+       
     }
 }

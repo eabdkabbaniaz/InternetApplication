@@ -23,6 +23,7 @@ class GroupRepository
             'group_id' => $group->id,
             'user_id' => $userID,
             'is_Admin' => true,
+            'isAccept'=>true,
         ]);
 
         return $group;
@@ -52,4 +53,10 @@ class GroupRepository
         }
         return false;
     }
+    public function findGroup($id)
+    {
+      return   $group= Groups::find($id);
+    }
+
+    
 }

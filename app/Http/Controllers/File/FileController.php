@@ -33,10 +33,25 @@ class FileController extends Controller
             return response()->json(['error' => 'Failed to upload file: ' . $e->getMessage()], 500);
         }
     }
+    public function update(Request $request)
+    {
+          return  $file = $this->fileService->update($request);       
+        }
+    
+    public function showfile($id)
+    {
+        return    $file = $this->fileService->showfile($id);        
+    }
+    public function showmywaitingfile()
+    {
+          return   $file = $this->fileService->showmywaitingfile();        
+    }
+    public function ActiveFile( $request)
+    {
+          return   $file = $this->fileService->ActiveFile($request);        
+    }
 
-
-   
-
+    
     public function destroy($id)
     {
         $result = $this->fileService->deleteFile($id);

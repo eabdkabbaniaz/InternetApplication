@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('loggings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->softDeletes();
+            $table->foreignId('file_id')->constrained('files');
+            $table->char('Oprationid');
             $table->timestamps();
         });
     }

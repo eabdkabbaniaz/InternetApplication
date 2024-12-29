@@ -25,15 +25,15 @@ class ResponseService
 
 
 
-    public static function error(string $message,  $data ="",  $code = 400): JsonResponse
+    public static function error(string $message,  $data ="",  $code = 200): JsonResponse
     {
         return response()->json([
             'massage' => $message,
-            'state' =>$code ,
+            'state' =>400 ,
             'data' =>$data,
         ], $code);
     }
-    public static function validation(string $message,  $data="" ,  $code = 500): JsonResponse
+    public static function validation(string $message,  $data="" ,  $code = 200): JsonResponse
     {
         return response()->json([
             'massage' => $message,

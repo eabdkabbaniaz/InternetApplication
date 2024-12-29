@@ -11,10 +11,13 @@ class Groups extends Model
     protected $guarded = [];
 
 public function files(){
-    return $this->hasMany(File::class,'group_id');
+    return $this->hasMany(File::class,'group_id')->where('Active',1);
 }
 public function users(){
-    return $this->belongsToMany(User::class,'group_users','group_id')->where('is_admin',0);
+    return $this->belongsToMany(User::class,'group_users','group_id')->where('is_admin',0)->where('isAccept',1);
+}
+public function waitusers(){
+    return $this->belongsToMany(User::class,'group_users','group_id')->where('is_admin',0)->where('isAccept',0);
 }
 
 }

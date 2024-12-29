@@ -12,7 +12,7 @@ class ApiResponse
         ], $status);
     }
 
-    public static function error($message = 'Operation failed', $status = 400)
+    public static function error($message = 'Operation failed', $status = 200)
     {
         return response()->json([
             'status' => 'error',

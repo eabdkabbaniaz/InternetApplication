@@ -9,4 +9,7 @@ class GroupUser extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function Group(){
+        return $this->belongsTo(Groups::class,'group_id');
+    }
 }

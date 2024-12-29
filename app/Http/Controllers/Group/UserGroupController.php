@@ -89,13 +89,27 @@ class UserGroupController extends Controller
         try {
             $removed = Groups::with('users')->findorFail($groupId);
             if ($removed) {
-                return ApiResponse::success('', "تمت إزالة المستخدم من المجموعة بنجاح.");
+                return ApiResponse::success( $removed, "تمت إزالة المستخدم من المجموعة بنجاح.");
             } else {
                 return ApiResponse::success('', "المستخدم غير موجود في هذه المجموعة.");
             }
         } catch (\Exception $e) {
             return Response::json(['error' => 'Failed to remove user from group: ' . $e->getMessage()], 500);
         }
+    }
+    public function getUserwaiting($groupId)
+    {
+        return $this->groupUserService->getUserwaiting($groupId);
+    }
+    public function Acceptinvitation($groupId)
+    {
+       return $this->groupUserService->Acceptinvitation($groupId);
+    
+    }
+    public function showWaitgroup()
+    {
+       return $this->groupUserService->showWaitgroup();
+    
     }
 
     public function getUsersNotInGroup($groupId)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\StatusLiked;
 use App\Http\Controllers\ReportController;
 use App\Events\FolderEvent;
 use Illuminate\Support\Facades\Route;
@@ -16,17 +17,24 @@ use Spatie\Activitylog\Models\Activity;
 |
 */
 
-Route::get('/', function () {
-    return view('groupReport');
+// Route::get('/', function () {
+//     return view('groupReport');
+// });
+Route::get('uu', function () {
+    event(new StatusLiked('wawa'))    ;
 });
 
 Route::get('/{filename}')->name('download.file');
+// Route::get('dd')->function([
+   
+// ])->name('dd');
 
 
 
 
-Route::get('/active', function () {
-    
+Route::get('/
+', function () {
+    // echo 12;
 //  return   event(new   FolderEvent('hello world'));
   
     // $userId = 1; // معرف المستخدم
@@ -35,8 +43,7 @@ Route::get('/active', function () {
 
     // استرجاع جميع الأنشطة المتعلقة بالملف (مثل من قام بتعديله أو إضافته)
 return  $activities = \Spatie\Activitylog\Models\Activity::
-        where('subject_id',5 )  // يحدد النشاطات المرتبطة بالملف (عن طريق معرفه)
-        ->get();})->name('active');
+        all()->last();})->name('active');
 
         
         

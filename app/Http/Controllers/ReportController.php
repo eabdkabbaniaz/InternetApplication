@@ -58,4 +58,16 @@ public  function DownloaduserPDF(Request $request)
  
 }
 
+
+
+
+
+
+public function rrr(){
+    $activities = \Spatie\Activitylog\Models\Activity::
+    where('subject_id',5 )  // يحدد النشاطات المرتبطة بالملف (عن طريق معرفه)
+    ->get();
+}
+
+
 }

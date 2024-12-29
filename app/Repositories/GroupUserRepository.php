@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Groups;
 use App\Models\GroupUser;
 use App\Models\User;
 
@@ -46,5 +47,26 @@ class GroupUserRepository
     public function getUserGroups(int $userId)
     {
         return User::with('groups')->findOrFail($userId);
+    }
+    public function Acceptinvitation( $group , $data)
+    {
+        return $group->update($data);
+    }
+
+    public function getUserwaiting( $groupId)
+    {
+      return   $user = Groups::with('waitusers')->findorFail($groupId);    }
+    public function find( $groupId)
+    {
+      return  GroupUser::find($groupId);
+    
+    }
+    public function showWaitUser( $groupId)
+    {
+      return  GroupUser::where([['groupId',$groupId],['isAccept',0]])->get();
+    }
+    public function showWaitgroup( $userID)
+    {
+      return  GroupUser::with('group')->where([['user_id',$userID],['isAccept',0]])->get();
     }
 }
